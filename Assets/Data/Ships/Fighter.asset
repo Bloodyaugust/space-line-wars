@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37f8c241d647a544a58316268d1932b, type: 3}
   m_Name: Fighter
   m_EditorClassIdentifier: 
-  speed: 13.54
+  armor: 0
+  health: 5
+  speed: 5
+  turnRate: 180
+  moveType: fighter
+  weapons:
+  - id: 
+    position: {x: 0, y: 0}

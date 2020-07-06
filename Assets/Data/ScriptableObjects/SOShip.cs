@@ -13,5 +13,6 @@ public class SOShip : ScriptableObject {
     public float health;
     public float speed;
     public float turnRate;
+    public string moveType;
     public ShipWeaponDefinition[] weapons;
 }
