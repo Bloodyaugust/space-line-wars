@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour {
     private TargetAcquisition targetAcquisition;
     private WeaponState currentState;
 
-    void Awake() {
+    public void Initialize() {
         ship = GetComponentInParent<Ship>();
         targetAcquisition = GetComponentInChildren<TargetAcquisition>();
 

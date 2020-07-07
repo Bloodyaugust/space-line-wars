@@ -61,9 +61,10 @@ public class Ship : MonoBehaviour {
 
     void Start() {
         foreach (ShipWeaponDefinition weapon in ShipData.weapons) {
-            GameObject newWeapon = Instantiate(WeaponPrefab, (Vector3)weapon.position + transform.position, Quaternion.identity, transform);
+            Weapon newWeapon = Instantiate(WeaponPrefab, (Vector3)weapon.position + transform.position, Quaternion.identity, transform).GetComponent<Weapon>();
 
-            newWeapon.GetComponent<Weapon>().WeaponData = weapon.weapon;
+            newWeapon.WeaponData = weapon.weapon;
+            newWeapon.Initialize();
         }
     }
 }

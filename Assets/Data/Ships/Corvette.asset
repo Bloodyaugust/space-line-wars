@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37f8c241d647a544a58316268d1932b, type: 3}
+  m_Name: Corvette
+  m_EditorClassIdentifier: 
+  armor: 0
+  health: 1000
+  speed: 3
+  turnRate: 120
+  moveType: fighter
+  weapons:
+  - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}
+    position: {x: 0, y: -0.5}
+  - weapon: {fileID: 11400000, guid: f6a1e2e9848cbfe4991aef5143cf2351, type: 2}
+    position: {x: 0, y: 0}
+  - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}
+    position: {x: 0, y: 0.5}
