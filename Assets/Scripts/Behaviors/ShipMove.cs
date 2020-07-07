@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipMove : MonoBehaviour {
-    private bool turnedLastFrame;
+    private bool trackingLastFrame = true;
     private float speed;
     private float turnRate;
     private int turnDirection;
@@ -43,17 +43,18 @@ public class ShipMove : MonoBehaviour {
     void Update() {
         switch(currentState) {
             case ShipState.Attack:
-                float angleToTarget = Vector2.Angle(transform.right, currentTarget.transform.position - transform.position);
+                float angleToTarget = Vector2.SignedAngle(transform.right, currentTarget.transform.position - transform.position);
 
-                if (angleToTarget >= 30) {
-                    if (!turnedLastFrame) {
-                        turnDirection = Random.value >= 0.5f ? -1 : 1;
+                if (Mathf.Abs(angleToTarget) <= 30) {
+                    transform.Rotate(0, 0, turnRate * Time.deltaTime * Mathf.Sign(angleToTarget), Space.Self);
+                    trackingLastFrame = true;
+                } else {
+                    if (trackingLastFrame) {
+                        turnDirection = turnDirection > 0 ? -1 : 1;
                     }
 
                     transform.Rotate(0, 0, turnRate * Time.deltaTime * turnDirection, Space.Self);
-                    turnedLastFrame = true;
-                } else {
-                    turnedLastFrame = false;
+                    trackingLastFrame = false;
                 }
                 break;
             case ShipState.Idle:
