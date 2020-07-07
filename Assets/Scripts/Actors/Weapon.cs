@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum WeaponState {
-    Attack,
     Cooldown,
     Idle,
     Reload
@@ -12,8 +11,10 @@ public enum WeaponState {
 public class Weapon : MonoBehaviour {
     public SOWeapon WeaponData;
 
+    private int clipRemaining;
+    private float timeToCooldown;
+    private float timeToReload;
     private Ship ship;
-    [SerializeField]
     private Ship target;
     private TargetAcquisition targetAcquisition;
     private WeaponState currentState;
@@ -31,12 +32,11 @@ public class Weapon : MonoBehaviour {
     }
 
     void OnTargetAcquired(Ship newTarget) {
-        SetState(WeaponState.Attack);
         target = newTarget;
     }
 
     void OnTargetLost() {
-        SetState(WeaponState.Idle);
+        target = null;
     }
 
     void SetState(WeaponState newState) {
@@ -44,12 +44,38 @@ public class Weapon : MonoBehaviour {
     }
 
     void Update() {
-        switch (currentState) {
-            case WeaponState.Attack:
-                transform.right = target.transform.position - transform.position;
-                break;
-            default:
-                break;
+        timeToCooldown -= Time.deltaTime;
+        timeToReload -= Time.deltaTime;
+
+        if (timeToCooldown > 0) {
+            currentState = WeaponState.Cooldown;
+        }
+
+        if (timeToReload > 0) {
+            currentState = WeaponState.Reload;
+        }
+
+        if (timeToReload <= 0 && timeToCooldown <= 0) {
+            if (currentState == WeaponState.Reload) {
+                clipRemaining = WeaponData.clipSize;
+            }
+
+            currentState = WeaponState.Idle;
+        } 
+
+        if (currentState == WeaponState.Idle && target != null) {
+            Debug.Log("fire: " + ship.name);
+
+            clipRemaining--;
+            timeToCooldown = WeaponData.cooldown;
+
+            if (clipRemaining <= 0) {
+                timeToReload = WeaponData.reload;
+            }
+        }
+
+        if (target != null) {
+            transform.right = target.transform.position - transform.position;
         }
     }
 }
