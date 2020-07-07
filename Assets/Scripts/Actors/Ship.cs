@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum ShipState {
@@ -31,6 +32,7 @@ public class Ship : MonoBehaviour {
 
         health.Initialize(ShipData.health);
         shipMove.Initialize();
+        targetAcquisition.Initialize(ShipData.weapons.Max(weapon => weapon.weapon.range));
 
         health.Died += OnDied;
         targetAcquisition.TargetAcquired += OnTargetAcquired;
