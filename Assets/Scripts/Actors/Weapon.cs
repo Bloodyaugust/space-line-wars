@@ -9,6 +9,7 @@ public enum WeaponState {
 }
 
 public class Weapon : MonoBehaviour {
+    public GameObject ProjectilePrefab;
     public SOWeapon WeaponData;
 
     private int clipRemaining;
@@ -23,7 +24,7 @@ public class Weapon : MonoBehaviour {
         ship = GetComponentInParent<Ship>();
         targetAcquisition = GetComponentInChildren<TargetAcquisition>();
 
-        targetAcquisition.Initialize(WeaponData.range);
+        targetAcquisition.Initialize(WeaponData.range, true);
 
         targetAcquisition.TargetAcquired += OnTargetAcquired;
         targetAcquisition.TargetLost += OnTargetLost;
@@ -72,7 +73,9 @@ public class Weapon : MonoBehaviour {
                 transform.right = target.transform.position - transform.position;
 
                 if (currentState == WeaponState.Idle) {
-                    Debug.Log("fire: " + ship.name);
+                    GameObject newProjectile = Instantiate(ProjectilePrefab, transform.position, transform.rotation);
+
+                    newProjectile.GetComponent<Projectile>().Initialize(ship.Team, ship.ShipData.speed, transform.right, WeaponData.projectile);
 
                     clipRemaining--;
                     timeToCooldown = WeaponData.cooldown;

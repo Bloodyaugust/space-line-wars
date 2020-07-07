@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64f976953abfb48469a24bb4b5bbac56, type: 3}
-  m_Name: Gun
+  m_Script: {fileID: 11500000, guid: 62259a3f3d27526459a64c2296af5bac, type: 3}
+  m_Name: Bullet
   m_EditorClassIdentifier: 
-  clipSize: 3
-  cooldown: 1
-  firingArc: 45
-  reload: 5
-  range: 5
-  projectile: {fileID: 11400000, guid: d090210289b1ecc4db0688e2d57a47f2, type: 2}
+  damage: 1
+  health: 1
+  moveType: ballistic
+  range: 8
+  speed: 10

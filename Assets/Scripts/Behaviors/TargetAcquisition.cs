@@ -7,23 +7,19 @@ public class TargetAcquisition : MonoBehaviour {
     public event Action<Ship> TargetAcquired;
     public event Action TargetLost;
 
+
     private bool hasTarget;
-    [SerializeField]
+    private bool loseTargetOnRangeExit;
     private Ship currentTarget;
     private Ship parentShip;
 
+    public void Initialize(float range, bool respectRangeForTargetKeeping) {
+        GetComponent<CircleCollider2D>().radius = range / 2;
+        loseTargetOnRangeExit = respectRangeForTargetKeeping;
+    }
+
     void Awake() {
         parentShip = GetComponentInParent<Ship>();
-    }
-
-    public void Initialize(float range) {
-        GetComponent<CircleCollider2D>().radius = range / 2;
-    }
-
-    void OnDied() {
-        TargetLost?.Invoke();
-        currentTarget.Died -= OnDied;
-        hasTarget = false;
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
@@ -34,9 +30,27 @@ public class TargetAcquisition : MonoBehaviour {
                 currentTarget = colliderShip;
 
                 TargetAcquired?.Invoke(colliderShip);
-                currentTarget.Died += OnDied;
+                currentTarget.Died += Untarget;
                 hasTarget = true;
             }
         }
+    }
+
+    void OnTriggerExit2D(Collider2D collider) {
+        if (loseTargetOnRangeExit && hasTarget && collider.name == "Health") {
+            Ship colliderShip = collider.gameObject.GetComponentInParent<Ship>();
+
+            if (colliderShip == currentTarget) {
+                Untarget();
+            }
+        }
+    }
+
+    void Untarget() {
+        TargetLost?.Invoke();
+
+        currentTarget.Died -= Untarget;
+        currentTarget = null;
+        hasTarget = false;
     }
 }

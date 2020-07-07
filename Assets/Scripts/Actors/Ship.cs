@@ -32,7 +32,7 @@ public class Ship : MonoBehaviour {
 
         health.Initialize(ShipData.health);
         shipMove.Initialize();
-        targetAcquisition.Initialize(ShipData.weapons.Max(weapon => weapon.weapon.range));
+        targetAcquisition.Initialize(ShipData.weapons.Max(weapon => weapon.weapon.range), false);
 
         health.Died += OnDied;
         targetAcquisition.TargetAcquired += OnTargetAcquired;

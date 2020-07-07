@@ -8,4 +8,5 @@ public class SOWeapon : ScriptableObject {
     public float firingArc;
     public float reload;
     public float range;
+    public SOProjectile projectile;
 }

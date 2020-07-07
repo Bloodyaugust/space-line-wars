@@ -43,18 +43,20 @@ public class ShipMove : MonoBehaviour {
     void Update() {
         switch(currentState) {
             case ShipState.Attack:
-                float angleToTarget = Vector2.SignedAngle(transform.right, currentTarget.transform.position - transform.position);
+                if (currentTarget != null) {
+                    float angleToTarget = Vector2.SignedAngle(transform.right, currentTarget.transform.position - transform.position);
 
-                if (Mathf.Abs(angleToTarget) <= 30) {
-                    transform.Rotate(0, 0, turnRate * Time.deltaTime * Mathf.Sign(angleToTarget), Space.Self);
-                    trackingLastFrame = true;
-                } else {
-                    if (trackingLastFrame) {
-                        turnDirection = turnDirection > 0 ? -1 : 1;
+                    if (Mathf.Abs(angleToTarget) <= 30) {
+                        transform.Rotate(0, 0, turnRate * Time.deltaTime * Mathf.Sign(angleToTarget), Space.Self);
+                        trackingLastFrame = true;
+                    } else {
+                        if (trackingLastFrame) {
+                            turnDirection = turnDirection > 0 ? -1 : 1;
+                        }
+
+                        transform.Rotate(0, 0, turnRate * Time.deltaTime * turnDirection, Space.Self);
+                        trackingLastFrame = false;
                     }
-
-                    transform.Rotate(0, 0, turnRate * Time.deltaTime * turnDirection, Space.Self);
-                    trackingLastFrame = false;
                 }
                 break;
             case ShipState.Idle:
