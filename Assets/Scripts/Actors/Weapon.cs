@@ -13,11 +13,26 @@ public class Weapon : MonoBehaviour {
     public SOWeapon WeaponData;
 
     private Ship ship;
+    [SerializeField]
+    private Ship target;
     private TargetAcquisition targetAcquisition;
     private WeaponState currentState;
 
-    void OnTargetAcquired(GameObject newTarget) {
+    void Awake() {
+        ship = GetComponentInParent<Ship>();
+        targetAcquisition = GetComponentInChildren<TargetAcquisition>();
+
+        targetAcquisition.Initialize(WeaponData.range);
+
+        targetAcquisition.TargetAcquired += OnTargetAcquired;
+        targetAcquisition.TargetLost += OnTargetLost;
+
+        SetState(WeaponState.Idle);
+    }
+
+    void OnTargetAcquired(Ship newTarget) {
         SetState(WeaponState.Attack);
+        target = newTarget;
     }
 
     void OnTargetLost() {
@@ -28,15 +43,13 @@ public class Weapon : MonoBehaviour {
         currentState = newState;
     }
 
-    void Start() {
-        ship = GetComponentInParent<Ship>();
-        targetAcquisition = GetComponentInChildren<TargetAcquisition>();
-
-        targetAcquisition.Initialize(WeaponData.range);
-
-        targetAcquisition.TargetAcquired += OnTargetAcquired;
-        targetAcquisition.TargetLost += OnTargetLost;
-
-        SetState(WeaponState.Idle);
+    void Update() {
+        switch (currentState) {
+            case WeaponState.Attack:
+                transform.right = target.transform.position - transform.position;
+                break;
+            default:
+                break;
+        }
     }
 }

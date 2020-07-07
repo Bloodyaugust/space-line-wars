@@ -3,7 +3,7 @@ using UnityEngine;
 
 [Serializable]
 public class ShipWeaponDefinition {
-    public string id;
+    public SOWeapon weapon;
     public Vector2 position;
 }
 

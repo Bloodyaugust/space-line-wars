@@ -13,6 +13,7 @@ public class Ship : MonoBehaviour {
     public event Action Died;
     public event Action<ShipState> StateChange;
 
+    public GameObject WeaponPrefab;
     public int Team;
     public SOShip ShipData;
 
@@ -23,12 +24,27 @@ public class Ship : MonoBehaviour {
     private ShipState currentState;
     private TargetAcquisition targetAcquisition;
 
+    void Awake() {
+        health = GetComponentInChildren<Health>();
+        shipMove = GetComponentInChildren<ShipMove>();
+        targetAcquisition = GetComponentInChildren<TargetAcquisition>();
+
+        health.Initialize(ShipData.health);
+        shipMove.Initialize();
+
+        health.Died += OnDied;
+        targetAcquisition.TargetAcquired += OnTargetAcquired;
+        targetAcquisition.TargetLost += OnTargetLost;
+
+        SetState(ShipState.Idle);
+    }
+
     void OnDied() {
         Died?.Invoke();
         Destroy(gameObject);
     }
 
-    void OnTargetAcquired(GameObject newTarget) {
+    void OnTargetAcquired(Ship newTarget) {
         SetState(ShipState.Attack);
     }
 
@@ -42,17 +58,10 @@ public class Ship : MonoBehaviour {
     }
 
     void Start() {
-        health = GetComponentInChildren<Health>();
-        shipMove = GetComponentInChildren<ShipMove>();
-        targetAcquisition = GetComponentInChildren<TargetAcquisition>();
+        foreach (ShipWeaponDefinition weapon in ShipData.weapons) {
+            GameObject newWeapon = Instantiate(WeaponPrefab, (Vector3)weapon.position + transform.position, Quaternion.identity, transform);
 
-        health.Initialize(ShipData.health);
-        shipMove.Initialize();
-
-        health.Died += OnDied;
-        targetAcquisition.TargetAcquired += OnTargetAcquired;
-        targetAcquisition.TargetLost += OnTargetLost;
-
-        SetState(ShipState.Idle);
+            newWeapon.GetComponent<Weapon>().WeaponData = weapon.weapon;
+        }
     }
 }

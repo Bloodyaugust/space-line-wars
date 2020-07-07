@@ -4,12 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TargetAcquisition : MonoBehaviour {
-    public event Action<GameObject> TargetAcquired;
+    public event Action<Ship> TargetAcquired;
     public event Action TargetLost;
 
     private bool hasTarget;
+    [SerializeField]
     private Ship currentTarget;
     private Ship parentShip;
+
+    void Awake() {
+        parentShip = GetComponentInParent<Ship>();
+    }
 
     public void Initialize(float range) {
         GetComponent<CircleCollider2D>().radius = range / 2;
@@ -28,14 +33,10 @@ public class TargetAcquisition : MonoBehaviour {
             if (colliderShip.Team != parentShip.Team) {
                 currentTarget = colliderShip;
 
-                TargetAcquired?.Invoke(currentTarget.gameObject);
+                TargetAcquired?.Invoke(colliderShip);
                 currentTarget.Died += OnDied;
                 hasTarget = true;
             }
         }
-    }
-
-    void Start() {
-        parentShip = GetComponentInParent<Ship>();
     }
 }

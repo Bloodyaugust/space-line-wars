@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 638251dfebc41794a8aef455dbaad461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WeaponPrefab: {fileID: 4326738011635481665, guid: a3ff6e5632d467742859aa153b63a66b,
+    type: 3}
   Team: 0
   ShipData: {fileID: 11400000, guid: 11a2018aecc70fa46b1bb08e08ab1fe9, type: 2}
 --- !u!114 &402564589087892042

@@ -9,14 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d37f8c241d647a544a58316268d1932b, type: 3}
-  m_Name: Fighter
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: Default Local Group_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  armor: 0
-  health: 5
-  speed: 5
-  turnRate: 180
-  moveType: fighter
-  weapons:
-  - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}
-    position: {x: 0, y: 0}
+  m_Group: {fileID: 0}
+  m_StaticContent: 0
