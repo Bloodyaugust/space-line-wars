@@ -6,5 +6,5 @@ public class SOWeapon : ScriptableObject {
     public int clipSize;
     public float cooldown;
     public float reload;
-    public string range;
+    public float range;
 }

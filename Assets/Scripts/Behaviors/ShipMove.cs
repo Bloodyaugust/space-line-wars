@@ -28,7 +28,7 @@ public class ShipMove : MonoBehaviour {
                 break;
             case ShipState.Idle:
                 transform.Rotate(0, 0, turnRate * Time.deltaTime, Space.Self);
-                transform.Translate(transform.up * Time.deltaTime * speed, Space.World);
+                transform.Translate(transform.right * Time.deltaTime * speed, Space.World);
                 break;
             default:
                 break;
