@@ -5,6 +5,7 @@ using UnityEngine;
 public class SOWeapon : ScriptableObject {
     public int clipSize;
     public float cooldown;
+    public float firingArc;
     public float reload;
     public float range;
 }

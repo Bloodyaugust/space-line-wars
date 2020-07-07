@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clipSize: 3
   cooldown: 1
+  firingArc: 15
   reload: 5
   range: 5

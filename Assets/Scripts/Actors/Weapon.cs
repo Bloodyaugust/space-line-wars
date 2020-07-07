@@ -61,21 +61,29 @@ public class Weapon : MonoBehaviour {
             }
 
             currentState = WeaponState.Idle;
-        } 
-
-        if (currentState == WeaponState.Idle && target != null) {
-            Debug.Log("fire: " + ship.name);
-
-            clipRemaining--;
-            timeToCooldown = WeaponData.cooldown;
-
-            if (clipRemaining <= 0) {
-                timeToReload = WeaponData.reload;
-            }
         }
 
         if (target != null) {
-            transform.right = target.transform.position - transform.position;
+            float angleToTarget = Vector2.SignedAngle(ship.transform.right, target.transform.position - transform.position);
+
+            Debug.DrawRay(transform.position, (target.transform.position - transform.position + (Vector3)Random.insideUnitCircle * 0.05f).normalized * Vector2.Distance(target.transform.position, transform.position), ship.Team > 0 ? Color.red : Color.green);
+
+            if (Mathf.Abs(angleToTarget) <= WeaponData.firingArc) {
+                transform.right = target.transform.position - transform.position;
+
+                if (currentState == WeaponState.Idle) {
+                    Debug.Log("fire: " + ship.name);
+
+                    clipRemaining--;
+                    timeToCooldown = WeaponData.cooldown;
+
+                    if (clipRemaining <= 0) {
+                        timeToReload = WeaponData.reload;
+                    }
+                }
+            } else {
+                transform.right = ship.transform.right;
+            }
         }
     }
 }
