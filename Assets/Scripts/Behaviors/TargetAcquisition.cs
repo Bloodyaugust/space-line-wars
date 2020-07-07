@@ -7,9 +7,8 @@ public class TargetAcquisition : MonoBehaviour {
     public event Action<Ship> TargetAcquired;
     public event Action TargetLost;
 
-
-    private bool hasTarget;
     private bool loseTargetOnRangeExit;
+    private List<Ship> possibleTargets;
     private Ship currentTarget;
     private Ship parentShip;
 
@@ -20,27 +19,29 @@ public class TargetAcquisition : MonoBehaviour {
 
     void Awake() {
         parentShip = GetComponentInParent<Ship>();
+
+        possibleTargets = new List<Ship>();
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        if (!hasTarget && collider.name == "Health") {
+        if (collider.name == "Health") {
             Ship colliderShip = collider.gameObject.GetComponentInParent<Ship>();
 
             if (colliderShip.Team != parentShip.Team) {
-                currentTarget = colliderShip;
-
-                TargetAcquired?.Invoke(colliderShip);
-                currentTarget.Died += Untarget;
-                hasTarget = true;
+                possibleTargets.Add(colliderShip);
             }
         }
     }
 
     void OnTriggerExit2D(Collider2D collider) {
-        if (loseTargetOnRangeExit && hasTarget && collider.name == "Health") {
+        if (collider.name == "Health") {
             Ship colliderShip = collider.gameObject.GetComponentInParent<Ship>();
 
-            if (colliderShip == currentTarget) {
+            if (colliderShip.Team != parentShip.Team) {
+                possibleTargets.Remove(colliderShip);
+            }
+
+            if (colliderShip == currentTarget && loseTargetOnRangeExit) {
                 Untarget();
             }
         }
@@ -51,6 +52,18 @@ public class TargetAcquisition : MonoBehaviour {
 
         currentTarget.Died -= Untarget;
         currentTarget = null;
-        hasTarget = false;
+    }
+
+    void Update() {
+        if (possibleTargets.Count > 0 && possibleTargets[0] == null) {
+            possibleTargets.RemoveAt(0);
+        }
+
+        if (currentTarget == null && possibleTargets.Count > 0) {
+            currentTarget = possibleTargets[0];
+            currentTarget.Died += Untarget;
+
+            TargetAcquired?.Invoke(currentTarget);
+        }
     }
 }
