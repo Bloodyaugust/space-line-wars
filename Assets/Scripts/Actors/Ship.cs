@@ -35,10 +35,11 @@ public class Ship : MonoBehaviour {
         targetAcquisition.Initialize(ShipData.weapons.Max(weapon => weapon.weapon.range), false);
 
         health.Died += OnDied;
+        shipMove.FollowComplete += OnFollowComplete;
         targetAcquisition.TargetAcquired += OnTargetAcquired;
         targetAcquisition.TargetLost += OnTargetLost;
 
-        SetState(ShipState.Idle);
+        SetState(ShipState.Follow);
     }
 
     void OnDied() {
@@ -46,12 +47,16 @@ public class Ship : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    void OnFollowComplete() {
+        SetState(ShipState.Idle);
+    }
+
     void OnTargetAcquired(Ship newTarget) {
         SetState(ShipState.Attack);
     }
 
     void OnTargetLost() {
-        SetState(ShipState.Idle);
+        SetState(ShipState.Follow);
     }
 
     void SetState(ShipState newState) {

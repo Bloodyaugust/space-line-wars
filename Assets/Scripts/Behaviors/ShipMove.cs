@@ -1,16 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipMove : MonoBehaviour {
+    public event Action FollowComplete;
+
     private bool trackingLastFrame = true;
     private float speed;
     private float turnRate;
+    private int navLineIndex = 0;
     private int turnDirection;
+    private LineRenderer navLine;
     private Ship ship;
     private Ship currentTarget;
     private ShipState currentState;
     private TargetAcquisition targetAcquisition;
+    private Vector3[] navLinePoints;
 
     public void Initialize() {
         ship = GetComponent<Ship>();
@@ -18,11 +24,19 @@ public class ShipMove : MonoBehaviour {
         speed = ship.ShipData.speed;
         turnRate = ship.ShipData.turnRate;
 
+        if (ship.Team == 1) {
+            Array.Reverse(navLinePoints);
+        }
+
         ship.StateChange += OnStateChange;
     }
 
     void Awake() {
+        navLine = GameObject.FindGameObjectWithTag("NavLine").GetComponent<LineRenderer>();
         targetAcquisition = GetComponentInChildren<TargetAcquisition>();
+
+        navLinePoints = new Vector3[navLine.positionCount];
+        navLine.GetPositions(navLinePoints);
 
         targetAcquisition.TargetAcquired += OnTargetAcquired;
         targetAcquisition.TargetLost += OnTargetLost;
@@ -58,6 +72,21 @@ public class ShipMove : MonoBehaviour {
                         trackingLastFrame = false;
                     }
                 }
+                break;
+            case ShipState.Follow:
+                if (Vector3.Distance(transform.position, navLinePoints[navLineIndex]) <= 1) {
+                    if (navLineIndex == navLine.positionCount - 1) {
+                        FollowComplete?.Invoke();
+                    } else {
+                        navLineIndex++;
+                    }
+                }
+
+                Vector3 targetDirection = (navLinePoints[navLineIndex] - transform.position).normalized;
+                Vector3 rotatedTargetDirection = Quaternion.Euler(0, 0, 90) * targetDirection;
+                Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedTargetDirection);
+
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * turnRate);
                 break;
             case ShipState.Idle:
                 transform.Rotate(0, 0, turnRate * Time.deltaTime, Space.Self);
