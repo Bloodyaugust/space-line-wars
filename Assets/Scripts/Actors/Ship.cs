@@ -29,16 +29,10 @@ public class Ship : MonoBehaviour {
         health = GetComponentInChildren<Health>();
         shipMove = GetComponentInChildren<ShipMove>();
         targetAcquisition = GetComponentInChildren<TargetAcquisition>();
-
-        shipMove.Initialize();
-        targetAcquisition.Initialize(ShipData.weapons.Max(weapon => weapon.weapon.range), false);
-
         health.Died += OnDied;
         shipMove.FollowComplete += OnFollowComplete;
         targetAcquisition.TargetAcquired += OnTargetAcquired;
         targetAcquisition.TargetLost += OnTargetLost;
-
-        SetState(ShipState.Follow);
     }
 
     void OnDied() {
@@ -65,6 +59,8 @@ public class Ship : MonoBehaviour {
 
     void Start() {
         health.Initialize(ShipData.health);
+        shipMove.Initialize();
+        targetAcquisition.Initialize(ShipData.weapons.Max(weapon => weapon.weapon.range), false);
 
         foreach (ShipWeaponDefinition weapon in ShipData.weapons) {
             Weapon newWeapon = Instantiate(WeaponPrefab, (Vector3)weapon.position + transform.position, Quaternion.identity, transform).GetComponent<Weapon>();
@@ -72,5 +68,7 @@ public class Ship : MonoBehaviour {
             newWeapon.WeaponData = weapon.weapon;
             newWeapon.Initialize();
         }
+
+        SetState(ShipState.Follow);
     }
 }

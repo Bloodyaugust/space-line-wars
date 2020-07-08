@@ -17,7 +17,6 @@ public class Health : MonoBehaviour {
 
             if (Hitpoints <= 0) {
                 isDead = true;
-                Died?.Invoke();
             }
         }
     }
@@ -27,5 +26,11 @@ public class Health : MonoBehaviour {
         startingHitpoints = hitpoints;
 
         gameObject.layer = LayerMask.NameToLayer(GetComponentInParent<Ship>().Team.ToString());
+    }
+
+    void Update() {
+        if (isDead) {
+            Died.Invoke();
+        }
     }
 }

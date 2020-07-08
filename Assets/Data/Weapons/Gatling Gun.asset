@@ -16,5 +16,5 @@ MonoBehaviour:
   cooldown: 0.2
   firingArc: 180
   reload: 15
-  range: 200
+  range: 5
   projectile: {fileID: 11400000, guid: d090210289b1ecc4db0688e2d57a47f2, type: 2}
