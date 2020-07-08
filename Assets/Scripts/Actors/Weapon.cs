@@ -29,6 +29,8 @@ public class Weapon : MonoBehaviour {
         targetAcquisition.TargetAcquired += OnTargetAcquired;
         targetAcquisition.TargetLost += OnTargetLost;
 
+        gameObject.layer = LayerMask.NameToLayer(ship.Team.ToString());
+
         SetState(WeaponState.Idle);
     }
 

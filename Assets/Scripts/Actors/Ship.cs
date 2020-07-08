@@ -30,7 +30,6 @@ public class Ship : MonoBehaviour {
         shipMove = GetComponentInChildren<ShipMove>();
         targetAcquisition = GetComponentInChildren<TargetAcquisition>();
 
-        health.Initialize(ShipData.health);
         shipMove.Initialize();
         targetAcquisition.Initialize(ShipData.weapons.Max(weapon => weapon.weapon.range), false);
 
@@ -65,6 +64,8 @@ public class Ship : MonoBehaviour {
     }
 
     void Start() {
+        health.Initialize(ShipData.health);
+
         foreach (ShipWeaponDefinition weapon in ShipData.weapons) {
             Weapon newWeapon = Instantiate(WeaponPrefab, (Vector3)weapon.position + transform.position, Quaternion.identity, transform).GetComponent<Weapon>();
 

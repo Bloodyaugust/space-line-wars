@@ -14,7 +14,8 @@ public class Projectile : MonoBehaviour {
         initialSpeed = speed;
         projectileData = projectile;
         team = newTeam;
-        // transform.right = right;
+        
+        gameObject.layer = LayerMask.NameToLayer(team.ToString());
     }
 
     void Awake() {

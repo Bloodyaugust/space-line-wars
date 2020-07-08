@@ -25,5 +25,7 @@ public class Health : MonoBehaviour {
     public void Initialize(float hitpoints) {
         Hitpoints = hitpoints;
         startingHitpoints = hitpoints;
+
+        gameObject.layer = LayerMask.NameToLayer(GetComponentInParent<Ship>().Team.ToString());
     }
 }

@@ -47,6 +47,10 @@ public class TargetAcquisition : MonoBehaviour {
         }
     }
 
+    void Start() {
+        gameObject.layer = LayerMask.NameToLayer(parentShip.Team.ToString());
+    }
+
     void Untarget() {
         TargetLost?.Invoke();
 
