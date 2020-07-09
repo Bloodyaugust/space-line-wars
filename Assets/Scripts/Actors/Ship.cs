@@ -21,6 +21,8 @@ public class Ship : MonoBehaviour {
     private bool turnedLastFrame;
     private int turnDirection;
     private Health health;
+    private MaterialPropertyBlock materialBlock;
+    private SpriteRenderer spriteRenderer;
     private ShipMove shipMove;
     private ShipState currentState;
     private TargetAcquisition targetAcquisition;
@@ -58,6 +60,12 @@ public class Ship : MonoBehaviour {
     }
 
     void Start() {
+        materialBlock = new MaterialPropertyBlock();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        materialBlock.SetFloat("_Hue", UnityEngine.Random.Range(-150, 150));
+        spriteRenderer.SetPropertyBlock(materialBlock);
+
         health.Initialize(ShipData.health);
         shipMove.Initialize();
         targetAcquisition.Initialize(ShipData.weapons.Max(weapon => weapon.weapon.range), false);
