@@ -101,6 +101,7 @@ MonoBehaviour:
     type: 3}
   Team: 0
   ShipData: {fileID: 11400000, guid: 11a2018aecc70fa46b1bb08e08ab1fe9, type: 2}
+  TeamColors: {fileID: 11400000, guid: 84c2f6e8156405246a95eff5869e9d9f, type: 2}
 --- !u!114 &402564589087892042
 MonoBehaviour:
   m_ObjectHideFlags: 0

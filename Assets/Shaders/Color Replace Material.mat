@@ -44,7 +44,7 @@ Material:
     - ENUM_613AB107: 1
     - Vector1_4A73D07F: 556.4
     - _EnableExternalAlpha: 0
-    - _Hue: -70
+    - _Hue: 30
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}

@@ -17,6 +17,7 @@ public class Ship : MonoBehaviour {
     public GameObject WeaponPrefab;
     public int Team;
     public SOShip ShipData;
+    public SOTeamColors TeamColors;
 
     private bool turnedLastFrame;
     private int turnDirection;
@@ -63,7 +64,7 @@ public class Ship : MonoBehaviour {
         materialBlock = new MaterialPropertyBlock();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        materialBlock.SetFloat("_Hue", UnityEngine.Random.Range(-150, 150));
+        materialBlock.SetFloat("_Hue", TeamColors.Hues[Team]);
         spriteRenderer.SetPropertyBlock(materialBlock);
 
         health.Initialize(ShipData.health);
