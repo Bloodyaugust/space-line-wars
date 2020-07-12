@@ -24,9 +24,8 @@ public class ProductionNode : MonoBehaviour {
     [SerializeField]
     private int shipIndex;
     private float buildProgress;
-    private MaterialPropertyBlock materialBlock;
     private ProductionNodeState currentState;
-    private SpriteRenderer spriteRenderer;
+    private SetMaterialProperties setMaterialProperties;
 
     public void Build(float amount) {
         buildProgress += amount;
@@ -34,14 +33,13 @@ public class ProductionNode : MonoBehaviour {
 
     void Awake() {
         capturable = GetComponentInChildren<Capturable>();
-        materialBlock = new MaterialPropertyBlock();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        setMaterialProperties = GetComponent<SetMaterialProperties>();
 
         if (!StartCaptured) {
             Team = 2;
         }
 
-        SetMaterial(0f);
+        setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], ProductionNodeData.sprite);
 
         capturable.Captured += OnCaptured;
     }
@@ -60,14 +58,7 @@ public class ProductionNode : MonoBehaviour {
             capturable.Disable();
         }
 
-        SetMaterial(1f);
-    }
-
-    void SetMaterial(float flashing) {
-        materialBlock.SetTexture("_MainTex", spriteRenderer.sprite.texture);
-        materialBlock.SetFloat("_Hue", TeamColors.Hues[Team]);
-        materialBlock.SetFloat("_Flashes", flashing);
-        spriteRenderer.SetPropertyBlock(materialBlock);
+        setMaterialProperties.SetMaterial(1f, TeamColors.Hues[Team], ProductionNodeData.sprite);
     }
 
     void Start() {

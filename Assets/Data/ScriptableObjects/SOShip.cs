@@ -16,4 +16,5 @@ public class SOShip : ScriptableObject {
     public float turnRate;
     public string moveType;
     public ShipWeaponDefinition[] weapons;
+    public Texture2D sprite;
 }

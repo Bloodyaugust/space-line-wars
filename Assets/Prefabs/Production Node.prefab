@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2799504236405925765}
   - component: {fileID: 2799504236405925766}
   - component: {fileID: 2113744065167255309}
+  - component: {fileID: 3410199573702696430}
   m_Layer: 0
   m_Name: Production Node
   m_TagString: ProductionNode
@@ -106,6 +107,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b7924c9c5c7016942a6d711aa8fcb4e7, type: 2}
   TeamColors: {fileID: 11400000, guid: 84c2f6e8156405246a95eff5869e9d9f, type: 2}
   shipIndex: 0
+--- !u!114 &3410199573702696430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799504236405925767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2e1fcfdd5044b4eadeeb328ac40b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5178342062793941990
 PrefabInstance:
   m_ObjectHideFlags: 0

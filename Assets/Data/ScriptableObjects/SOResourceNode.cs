@@ -5,4 +5,5 @@ using UnityEngine;
 public class SOResourceNode : ScriptableObject {
     public float resourceRate;
     public string[] resourceFlags;
+    public Texture2D sprite;
 }

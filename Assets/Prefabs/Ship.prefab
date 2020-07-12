@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 295436620143949957}
   - component: {fileID: 1439786652674313024}
   - component: {fileID: 402564589087892042}
+  - component: {fileID: -7743013726465394660}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -100,6 +101,7 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 4326738011635481665, guid: a3ff6e5632d467742859aa153b63a66b,
     type: 3}
   Team: 0
+  NavLine: {fileID: 0}
   ShipData: {fileID: 11400000, guid: 11a2018aecc70fa46b1bb08e08ab1fe9, type: 2}
   TeamColors: {fileID: 11400000, guid: 84c2f6e8156405246a95eff5869e9d9f, type: 2}
 --- !u!114 &402564589087892042
@@ -112,6 +114,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a18c3cec2a082547ae853ac1156a666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7743013726465394660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295436620143949956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2e1fcfdd5044b4eadeeb328ac40b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &808474216407870938

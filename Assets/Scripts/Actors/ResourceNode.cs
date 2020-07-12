@@ -19,20 +19,18 @@ public class ResourceNode : MonoBehaviour {
 
     private Capturable capturable;
     [SerializeField]
-    private MaterialPropertyBlock materialBlock;
     private ResourceNodeState currentState;
-    private SpriteRenderer spriteRenderer;
+    private SetMaterialProperties setMaterialProperties;
 
     void Awake() {
         capturable = GetComponentInChildren<Capturable>();
-        materialBlock = new MaterialPropertyBlock();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        setMaterialProperties = GetComponent<SetMaterialProperties>();
 
         if (!StartCaptured) {
             Team = 2;
         }
 
-        SetMaterial(0f);
+        setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], ResourceNodeData.sprite);
 
         capturable.Captured += OnCaptured;
     }
@@ -50,14 +48,7 @@ public class ResourceNode : MonoBehaviour {
             capturable.Disable();
         }
 
-        SetMaterial(1f);
-    }
-
-    void SetMaterial(float flashing) {
-        materialBlock.SetTexture("_MainTex", spriteRenderer.sprite.texture);
-        materialBlock.SetFloat("_Hue", TeamColors.Hues[Team]);
-        materialBlock.SetFloat("_Flashes", flashing);
-        spriteRenderer.SetPropertyBlock(materialBlock);
+        setMaterialProperties.SetMaterial(1f, TeamColors.Hues[Team], ResourceNodeData.sprite);
     }
 
     void Start() {

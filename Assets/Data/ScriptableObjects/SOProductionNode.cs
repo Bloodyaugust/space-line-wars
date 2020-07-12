@@ -5,4 +5,5 @@ using UnityEngine;
 public class SOProductionNode : ScriptableObject {
     public int tier;
     public float buildEfficiency;
+    public Texture2D sprite;
 }

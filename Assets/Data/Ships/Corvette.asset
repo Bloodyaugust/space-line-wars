@@ -25,3 +25,4 @@ MonoBehaviour:
     position: {x: 0, y: 0}
   - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}
     position: {x: 0, y: 0.5}
+  sprite: {fileID: 2800000, guid: d73f3f2f24dad374e9ccbf0528103770, type: 3}

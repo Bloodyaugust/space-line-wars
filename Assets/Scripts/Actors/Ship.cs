@@ -23,18 +23,13 @@ public class Ship : MonoBehaviour {
     private bool turnedLastFrame;
     private int turnDirection;
     private Health health;
-    private MaterialPropertyBlock materialBlock;
-    private SpriteRenderer spriteRenderer;
     private ShipMove shipMove;
     private ShipState currentState;
+    private SetMaterialProperties setMaterialProperties;
     private TargetAcquisition targetAcquisition;
 
     public void Initialize() {
-        materialBlock = new MaterialPropertyBlock();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        materialBlock.SetFloat("_Hue", TeamColors.Hues[Team]);
-        spriteRenderer.SetPropertyBlock(materialBlock);
+        setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], ShipData.sprite);
 
         health.Initialize(ShipData.health);
         shipMove.Initialize(NavLine);
@@ -52,6 +47,7 @@ public class Ship : MonoBehaviour {
 
     void Awake() {
         health = GetComponentInChildren<Health>();
+        setMaterialProperties = GetComponent<SetMaterialProperties>();
         shipMove = GetComponentInChildren<ShipMove>();
         targetAcquisition = GetComponentInChildren<TargetAcquisition>();
         health.Died += OnDied;
