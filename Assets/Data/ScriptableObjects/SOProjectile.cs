@@ -5,6 +5,7 @@ using UnityEngine;
 public class SOProjectile : ScriptableObject {
     public float damage;
     public float health;
+    public string[] flags;
     public string moveType;
     public float range;
     public float speed;

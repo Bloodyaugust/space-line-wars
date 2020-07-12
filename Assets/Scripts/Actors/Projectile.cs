@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
+    private bool damageDone;
     private float distanceTraveled;
     private float health;
     private float initialSpeed;
@@ -27,7 +30,15 @@ public class Projectile : MonoBehaviour {
             Ship colliderShip = collider.gameObject.GetComponentInParent<Ship>();
 
             if (colliderShip.Team != team) {
-                colliderShip.GetComponentInChildren<Health>().Damage(projectileData.damage);
+                if (Array.Exists(projectileData.flags, flag => flag == "OneShot")) {
+                    if (!damageDone) {
+                        colliderShip.GetComponentInChildren<Health>().Damage(projectileData.damage);
+                    }
+                } else {
+                    colliderShip.GetComponentInChildren<Health>().Damage(projectileData.damage);
+                }
+
+                damageDone = true;
                 Destroy(gameObject);
             }
         }
