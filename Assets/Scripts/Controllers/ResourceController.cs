@@ -59,4 +59,14 @@ public class ResourceController : MonoBehaviour {
             currentNode.Captured += OnResourceNodeCaptured;
         }
     }
+
+    void Update() {
+        for (int i = 0; i < productionNodes.Length; i++) {
+            ProductionNode currentNode = productionNodes[i];
+
+            if (currentNode.Team < 2) {
+                currentNode.Build((resourceRate[currentNode.Team] / productionNodeCount[currentNode.Team]) * Time.deltaTime);
+            }
+        }
+    }
 }

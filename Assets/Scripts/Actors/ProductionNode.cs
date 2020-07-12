@@ -81,20 +81,16 @@ public class ProductionNode : MonoBehaviour {
     }
 
     void Update() {
-        if (currentState == ProductionNodeState.Building) {
-            Build(ProductionNodeData.buildEfficiency * Time.deltaTime);
+        if (currentState == ProductionNodeState.Building && buildProgress >= ShipDataset[shipIndex].cost) {
+            GameObject newShip = Instantiate(ShipPrefab, transform.position, Quaternion.identity);
+            Ship shipComponent = newShip.GetComponent<Ship>();
 
-            if (buildProgress >= ShipDataset[shipIndex].buildTime) {
-                GameObject newShip = Instantiate(ShipPrefab, transform.position, Quaternion.identity);
-                Ship shipComponent = newShip.GetComponent<Ship>();
+            shipComponent.NavLine = navLine;
+            shipComponent.ShipData = ShipDataset[shipIndex];
+            shipComponent.Team = Team;
+            shipComponent.Initialize();
 
-                shipComponent.NavLine = navLine;
-                shipComponent.ShipData = ShipDataset[shipIndex];
-                shipComponent.Team = Team;
-                shipComponent.Initialize();
-
-                buildProgress -= ShipDataset[shipIndex].buildTime;
-            }
+            buildProgress -= ShipDataset[shipIndex].cost;
         }
     }
 }
