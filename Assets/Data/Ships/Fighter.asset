@@ -15,7 +15,7 @@ MonoBehaviour:
   armor: 0
   buildTime: 3
   health: 5
-  speed: 5
+  speed: 2
   turnRate: 180
   moveType: fighter
   weapons:

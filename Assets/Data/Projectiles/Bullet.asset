@@ -16,4 +16,4 @@ MonoBehaviour:
   health: 1
   moveType: ballistic
   range: 8
-  speed: 10
+  speed: 7
