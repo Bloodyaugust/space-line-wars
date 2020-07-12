@@ -15,6 +15,11 @@ public class Capturable : MonoBehaviour {
     private float captureInterval = 1;
     private float timeToTestCapture;
 
+    public void Disable() {
+        circleCollider2D.enabled = false;
+        enabled = false;
+    }
+
     public void ForceCapture(int newTeam) {
         captured = true;
         currentTeam = newTeam;

@@ -28,6 +28,10 @@ public class ProductionNode : MonoBehaviour {
     private ProductionNodeState currentState;
     private SpriteRenderer spriteRenderer;
 
+    public void Build(float amount) {
+        buildProgress += amount;
+    }
+
     void Awake() {
         capturable = GetComponentInChildren<Capturable>();
         materialBlock = new MaterialPropertyBlock();
@@ -46,17 +50,23 @@ public class ProductionNode : MonoBehaviour {
 
         materialBlock.SetTexture("_MainTex", spriteRenderer.sprite.texture);
         materialBlock.SetFloat("_Hue", TeamColors.Hues[Team]);
+        materialBlock.SetFloat("_Flashes", 1f);
         spriteRenderer.SetPropertyBlock(materialBlock);
 
         currentState = ProductionNodeState.Building;
 
+        StateChange?.Invoke(currentState);
+
         if (StartCaptured) {
             capturable.Captured -= OnCaptured;
+            capturable.Disable();
         }
     }
 
     void Start() {
         currentState = ProductionNodeState.Idle;
+
+        StateChange?.Invoke(currentState);
 
         if (StartCaptured) {
             capturable.ForceCapture(Team);
@@ -65,7 +75,7 @@ public class ProductionNode : MonoBehaviour {
 
     void Update() {
         if (currentState == ProductionNodeState.Building) {
-            buildProgress += ProductionNodeData.buildEfficiency * Time.deltaTime;
+            Build(ProductionNodeData.buildEfficiency * Time.deltaTime);
 
             if (buildProgress >= ShipDataset[shipIndex].buildTime) {
                 GameObject newShip = Instantiate(ShipPrefab, transform.position, Quaternion.identity);
