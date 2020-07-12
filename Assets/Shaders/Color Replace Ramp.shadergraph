@@ -10,7 +10,7 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"05debaa3-c9a4-4413-90a7-386b9dc66c6b\"\n    },\n    \"m_Name\": \"Hue\",\n    \"m_DefaultReferenceName\": \"Vector1_A188B773\",\n    \"m_OverrideReferenceName\": \"_Hue\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": true,\n    \"m_Hidden\": false,\n    \"m_Value\": -70.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"05debaa3-c9a4-4413-90a7-386b9dc66c6b\"\n    },\n    \"m_Name\": \"Hue\",\n    \"m_DefaultReferenceName\": \"Vector1_A188B773\",\n    \"m_OverrideReferenceName\": \"_Hue\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": true,\n    \"m_Hidden\": false,\n    \"m_Value\": 180.0,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    }\n}"
         },
         {
             "typeInfo": {
