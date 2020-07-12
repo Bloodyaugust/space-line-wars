@@ -10,7 +10,7 @@ public enum ResourceNodeState {
 }
 
 public class ResourceNode : MonoBehaviour {
-    public event Action<ResourceNodeState> StateChange;
+    public event Action<int, int, SOResourceNode> Captured;
 
     public bool StartCaptured;
     public int Team;
@@ -38,11 +38,12 @@ public class ResourceNode : MonoBehaviour {
     }
 
     void OnCaptured(int newTeam) {
+        int oldTeam = Team;
         Team = newTeam;
 
         currentState = ResourceNodeState.Mining;
 
-        StateChange?.Invoke(currentState);
+        Captured?.Invoke(newTeam, oldTeam, ResourceNodeData);
 
         if (StartCaptured) {
             capturable.Captured -= OnCaptured;
@@ -62,7 +63,7 @@ public class ResourceNode : MonoBehaviour {
     void Start() {
         currentState = ResourceNodeState.Idle;
 
-        StateChange?.Invoke(currentState);
+        Captured?.Invoke(Team, Team, ResourceNodeData);
 
         if (StartCaptured) {
             capturable.ForceCapture(Team);

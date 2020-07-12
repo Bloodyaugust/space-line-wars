@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6675664572987725189}
   m_Layer: 0
   m_Name: Resource Node
-  m_TagString: Untagged
+  m_TagString: ResourceNode
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,6 @@ MonoBehaviour:
   StartCaptured: 0
   Team: 0
   ResourceNodeData: {fileID: 11400000, guid: 2cc82c75d640dcb4c81520a9b76836c5, type: 2}
-  ShipDataset: []
   TeamColors: {fileID: 11400000, guid: 84c2f6e8156405246a95eff5869e9d9f, type: 2}
 --- !u!1001 &5286504999296544951
 PrefabInstance:
