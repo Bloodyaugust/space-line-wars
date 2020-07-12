@@ -12,6 +12,7 @@ public enum ProductionNodeState {
 public class ProductionNode : MonoBehaviour {
     public event Action<ProductionNodeState> StateChange;
 
+    public bool StartCaptured;
     public GameObject ShipPrefab;
     public int Team;
     public LineRenderer navLine;
@@ -19,13 +20,47 @@ public class ProductionNode : MonoBehaviour {
     public SOShip[] ShipDataset;
     public SOTeamColors TeamColors;
 
+    private Capturable capturable;
     [SerializeField]
     private int shipIndex;
     private float buildProgress;
+    private MaterialPropertyBlock materialBlock;
     private ProductionNodeState currentState;
+    private SpriteRenderer spriteRenderer;
+
+    void Awake() {
+        capturable = GetComponentInChildren<Capturable>();
+        materialBlock = new MaterialPropertyBlock();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (!StartCaptured) {
+            Team = 2;
+        }
+
+        capturable.Captured += OnCaptured;
+    }
+
+    void OnCaptured(int newTeam) {
+        Team = newTeam;
+        buildProgress = 0;
+
+        materialBlock.SetTexture("_MainTex", spriteRenderer.sprite.texture);
+        materialBlock.SetFloat("_Hue", TeamColors.Hues[Team]);
+        spriteRenderer.SetPropertyBlock(materialBlock);
+
+        currentState = ProductionNodeState.Building;
+
+        if (StartCaptured) {
+            capturable.Captured -= OnCaptured;
+        }
+    }
 
     void Start() {
-        currentState = ProductionNodeState.Building;
+        currentState = ProductionNodeState.Idle;
+
+        if (StartCaptured) {
+            capturable.ForceCapture(Team);
+        }
     }
 
     void Update() {
