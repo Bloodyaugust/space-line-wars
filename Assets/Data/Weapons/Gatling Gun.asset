@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64f976953abfb48469a24bb4b5bbac56, type: 3}
   m_Name: Gatling Gun
   m_EditorClassIdentifier: 
-  clipSize: 15
+  clipSize: 4
   cooldown: 0.2
   firingArc: 180
-  reload: 15
+  reload: 3
   range: 5
   projectile: {fileID: 11400000, guid: d090210289b1ecc4db0688e2d57a47f2, type: 2}

@@ -316,14 +316,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9424f8f7b4b07264dbc05a838a97611a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberShips: 200
-  ShipPrefab: {fileID: 295436620143949956, guid: 6affb2c5b762b4a4d881dbf6530f2598,
-    type: 3}
+  timeScale: 1
 --- !u!1001 &937528514
 PrefabInstance:
   m_ObjectHideFlags: 0
