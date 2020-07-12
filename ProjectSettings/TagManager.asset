@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NavLine
   - ResourceNode
+  - ProductionNode
   layers:
   - Default
   - TransparentFX

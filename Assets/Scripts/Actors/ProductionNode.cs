@@ -10,7 +10,7 @@ public enum ProductionNodeState {
 }
 
 public class ProductionNode : MonoBehaviour {
-    public event Action<ProductionNodeState> StateChange;
+    public event Action<int, int> Captured;
 
     public bool StartCaptured;
     public GameObject ShipPrefab;
@@ -47,12 +47,13 @@ public class ProductionNode : MonoBehaviour {
     }
 
     void OnCaptured(int newTeam) {
+        int oldTeam = Team;
         Team = newTeam;
         buildProgress = 0;
 
         currentState = ProductionNodeState.Building;
 
-        StateChange?.Invoke(currentState);
+        Captured?.Invoke(Team, oldTeam);
 
         if (StartCaptured) {
             capturable.Captured -= OnCaptured;
@@ -72,7 +73,7 @@ public class ProductionNode : MonoBehaviour {
     void Start() {
         currentState = ProductionNodeState.Idle;
 
-        StateChange?.Invoke(currentState);
+        Captured?.Invoke(Team, Team);
 
         if (StartCaptured) {
             capturable.ForceCapture(Team);
