@@ -16,6 +16,7 @@ public class Ship : MonoBehaviour {
 
     public GameObject WeaponPrefab;
     public int Team;
+    public LineRenderer NavLine;
     public SOShip ShipData;
     public SOTeamColors TeamColors;
 
@@ -27,6 +28,27 @@ public class Ship : MonoBehaviour {
     private ShipMove shipMove;
     private ShipState currentState;
     private TargetAcquisition targetAcquisition;
+
+    public void Initialize() {
+        materialBlock = new MaterialPropertyBlock();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        materialBlock.SetFloat("_Hue", TeamColors.Hues[Team]);
+        spriteRenderer.SetPropertyBlock(materialBlock);
+
+        health.Initialize(ShipData.health);
+        shipMove.Initialize(NavLine);
+        targetAcquisition.Initialize(ShipData.weapons.Max(weapon => weapon.weapon.range), false);
+
+        foreach (ShipWeaponDefinition weapon in ShipData.weapons) {
+            Weapon newWeapon = Instantiate(WeaponPrefab, (Vector3)weapon.position + transform.position, Quaternion.identity, transform).GetComponent<Weapon>();
+
+            newWeapon.WeaponData = weapon.weapon;
+            newWeapon.Initialize();
+        }
+
+        SetState(ShipState.Follow);
+    }
 
     void Awake() {
         health = GetComponentInChildren<Health>();
@@ -58,26 +80,5 @@ public class Ship : MonoBehaviour {
     void SetState(ShipState newState) {
         currentState = newState;
         StateChange?.Invoke(currentState);
-    }
-
-    void Start() {
-        materialBlock = new MaterialPropertyBlock();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        materialBlock.SetFloat("_Hue", TeamColors.Hues[Team]);
-        spriteRenderer.SetPropertyBlock(materialBlock);
-
-        health.Initialize(ShipData.health);
-        shipMove.Initialize();
-        targetAcquisition.Initialize(ShipData.weapons.Max(weapon => weapon.weapon.range), false);
-
-        foreach (ShipWeaponDefinition weapon in ShipData.weapons) {
-            Weapon newWeapon = Instantiate(WeaponPrefab, (Vector3)weapon.position + transform.position, Quaternion.identity, transform).GetComponent<Weapon>();
-
-            newWeapon.WeaponData = weapon.weapon;
-            newWeapon.Initialize();
-        }
-
-        SetState(ShipState.Follow);
     }
 }

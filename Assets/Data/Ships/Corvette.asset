@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Corvette
   m_EditorClassIdentifier: 
   armor: 0
+  buildTime: 8
   health: 1000
   speed: 3
   turnRate: 120

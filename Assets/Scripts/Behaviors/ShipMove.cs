@@ -18,13 +18,17 @@ public class ShipMove : MonoBehaviour {
     private TargetAcquisition targetAcquisition;
     private Vector3[] navLinePoints;
 
-    public void Initialize() {
+    public void Initialize(LineRenderer newNavLine) {
         ship = GetComponent<Ship>();
 
+        navLine = newNavLine;
         speed = ship.ShipData.speed;
         turnRate = ship.ShipData.turnRate;
 
-        if (ship.Team == 1) {
+        navLinePoints = new Vector3[navLine.positionCount];
+        navLine.GetPositions(navLinePoints);
+
+        if (ship.Team == 0) {
             Array.Reverse(navLinePoints);
         }
 
@@ -32,11 +36,7 @@ public class ShipMove : MonoBehaviour {
     }
 
     void Awake() {
-        navLine = GameObject.FindGameObjectWithTag("NavLine").GetComponent<LineRenderer>();
         targetAcquisition = GetComponentInChildren<TargetAcquisition>();
-
-        navLinePoints = new Vector3[navLine.positionCount];
-        navLine.GetPositions(navLinePoints);
 
         targetAcquisition.TargetAcquired += OnTargetAcquired;
         targetAcquisition.TargetLost += OnTargetLost;

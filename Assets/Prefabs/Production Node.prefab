@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2799504236405925765}
   - component: {fileID: 2799504236405925766}
+  - component: {fileID: 2113744065167255309}
   m_Layer: 0
   m_Name: Production Node
   m_TagString: Untagged
@@ -81,3 +82,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2113744065167255309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799504236405925767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc77d5146de241147b3c36f23ab0c5b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShipPrefab: {fileID: 295436620143949956, guid: 6affb2c5b762b4a4d881dbf6530f2598,
+    type: 3}
+  Team: 0
+  navLine: {fileID: 0}
+  ProductionNodeData: {fileID: 11400000, guid: e5bfad9b56ce6b7468ff8ca6e75e857c, type: 2}
+  ShipDataset:
+  - {fileID: 11400000, guid: 11a2018aecc70fa46b1bb08e08ab1fe9, type: 2}
+  - {fileID: 11400000, guid: b7924c9c5c7016942a6d711aa8fcb4e7, type: 2}
+  TeamColors: {fileID: 11400000, guid: 84c2f6e8156405246a95eff5869e9d9f, type: 2}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Fighter
   m_EditorClassIdentifier: 
   armor: 0
+  buildTime: 3
   health: 5
   speed: 5
   turnRate: 180
