@@ -69,3 +69,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Paid Unity Store Assets
+/Assets/Gizmos/ProCamera2D/
+/Assets/ProCamera2D/
+/Assets/Rewired/
+/RewiredBackup/
