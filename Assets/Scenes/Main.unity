@@ -433,7 +433,7 @@ MonoBehaviour:
   PinchZoomSpeed: 50
   ZoomSmoothness: 0.2
   MaxZoomInAmount: 5
-  MaxZoomOutAmount: 20
+  MaxZoomOutAmount: 2
   ZoomToInputCenter: 1
   IsZooming: 0
   AllowPan: 1
@@ -447,7 +447,7 @@ MonoBehaviour:
     height: 1
   DragPanSpeedMultiplier: {x: 1, y: 1}
   UsePanByMoveToEdges: 1
-  EdgesPanSpeed: {x: 2, y: 2}
+  EdgesPanSpeed: {x: 30, y: 30}
   TopPanEdge: 0.9
   BottomPanEdge: 0.9
   LeftPanEdge: 0.9
