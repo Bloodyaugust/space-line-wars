@@ -27,9 +27,11 @@ public class Ship : MonoBehaviour {
     private ShipState currentState;
     private SetMaterialProperties setMaterialProperties;
     private TargetAcquisition targetAcquisition;
+    private TrailRenderer trailRenderer;
 
     public void Initialize() {
         setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], ShipData.sprite);
+        trailRenderer.time = Mathf.Clamp(2 - ShipData.speed, 0.5f, 2);
 
         health.Initialize(ShipData.health);
         shipMove.Initialize(NavLine);
@@ -50,6 +52,7 @@ public class Ship : MonoBehaviour {
         setMaterialProperties = GetComponent<SetMaterialProperties>();
         shipMove = GetComponentInChildren<ShipMove>();
         targetAcquisition = GetComponentInChildren<TargetAcquisition>();
+        trailRenderer = GetComponent<TrailRenderer>();
         health.Died += OnDied;
         shipMove.FollowComplete += OnFollowComplete;
         targetAcquisition.TargetAcquired += OnTargetAcquired;
