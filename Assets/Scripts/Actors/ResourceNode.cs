@@ -30,8 +30,6 @@ public class ResourceNode : MonoBehaviour {
             Team = 2;
         }
 
-        setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], ResourceNodeData.sprite);
-
         capturable.Captured += OnCaptured;
     }
 
@@ -58,6 +56,8 @@ public class ResourceNode : MonoBehaviour {
 
         if (StartCaptured) {
             capturable.ForceCapture(Team);
+        } else {
+            setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], ResourceNodeData.sprite);
         }
     }
 }
