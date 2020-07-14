@@ -9,29 +9,42 @@ public class ResourceController : MonoBehaviour {
     private Dictionary<int, float> resourceRate = new Dictionary<int, float>() { {0, 0}, {1, 0} };
     private ProductionNode[] productionNodes;
     private ResourceNode[] resourceNodes;
+    private UIController uiController;
+
+    void Awake() {
+        uiController = UIController.Instance;
+    }
 
     void OnProductionNodeCaptured(int newTeam, int oldTeam) {
+        float[] storeProductionNodes = uiController.Store["ProductionNodes"];
+
         if (newTeam != 2) {
             productionNodeCount[newTeam] += 1;
+            storeProductionNodes[newTeam] = productionNodeCount[newTeam];
 
             if (oldTeam != 2) {
                 productionNodeCount[oldTeam]--;
+                storeProductionNodes[oldTeam] = productionNodeCount[oldTeam];
             }
         }
 
-        Debug.Log("Production Nodes: " + productionNodeCount[0] + ", " + productionNodeCount[1]);
+        uiController.SetValue("ProductionNodes", storeProductionNodes);
     }
 
     void OnResourceNodeCaptured(int newTeam, int oldTeam, SOResourceNode resourceNodeData) {
+        float[] storeResourceRates = uiController.Store["ResourceRate"];
+
         if (newTeam != 2) {
             resourceRate[newTeam] += resourceNodeData.resourceRate;
+            storeResourceRates[newTeam] = resourceRate[newTeam];
 
             if (oldTeam != 2) {
                 resourceRate[oldTeam] -= resourceNodeData.resourceRate;
+                storeResourceRates[oldTeam] = resourceRate[oldTeam];
             }
         }
 
-        Debug.Log("Resource Rates: " + resourceRate[0] + ", " + resourceRate[1]);
+        uiController.SetValue("ResourceRate", storeResourceRates);
     }
 
     void Start() {
