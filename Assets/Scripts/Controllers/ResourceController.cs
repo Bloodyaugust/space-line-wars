@@ -78,7 +78,7 @@ public class ResourceController : MonoBehaviour {
             ProductionNode currentNode = productionNodes[i];
 
             if (currentNode.Team < 2) {
-                currentNode.Build((resourceRate[currentNode.Team] / productionNodeCount[currentNode.Team]) * Time.deltaTime);
+                currentNode.Build((resourceRate[currentNode.Team] / productionNodeCount[currentNode.Team]) * Time.deltaTime, resourceRate[currentNode.Team] / productionNodeCount[currentNode.Team]);
             }
         }
     }

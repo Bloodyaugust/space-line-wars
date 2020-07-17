@@ -11,7 +11,8 @@ public class UIController : Singleton<UIController> {
 
     public Dictionary<string, dynamic> Store = new Dictionary<string, dynamic>() {
         {"ProductionNodes", new float[2]},
-        {"ResourceRate", new float[2]}
+        {"ResourceRate", new float[2]},
+        {"Selection", null}
     };
 
 	static public T RegisterComponent<T> () where T: Component {
@@ -26,5 +27,11 @@ public class UIController : Singleton<UIController> {
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
+    }
+
+    void Update() {
+        if (Input.GetKeyUp(KeyCode.Escape)) {
+            SetValue("Selection", null);
+        }
     }
 }

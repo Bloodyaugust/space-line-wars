@@ -13,27 +13,30 @@ public class ProductionNode : MonoBehaviour {
     public event Action<int, int> Captured;
 
     public bool StartCaptured;
+    public float LastBuildProgress { get; private set; }
     public GameObject ShipPrefab;
     public int Team;
     public LineRenderer navLine;
     public SOProductionNode ProductionNodeData;
+    public SOShip CurrentShip;
     public SOShip[] ShipDataset;
     public SOTeamColors TeamColors;
 
     private Capturable capturable;
-    [SerializeField]
-    private int shipIndex;
     private float buildProgress;
     private ProductionNodeState currentState;
     private SetMaterialProperties setMaterialProperties;
 
-    public void Build(float amount) {
+    public void Build(float amount, float nonDeltaAmount) {
         buildProgress += amount;
+        LastBuildProgress = nonDeltaAmount;
     }
 
     void Awake() {
         capturable = GetComponentInChildren<Capturable>();
         setMaterialProperties = GetComponent<SetMaterialProperties>();
+
+        CurrentShip = ShipDataset[0];
 
         if (!StartCaptured) {
             Team = 2;
@@ -72,16 +75,16 @@ public class ProductionNode : MonoBehaviour {
     }
 
     void Update() {
-        if (currentState == ProductionNodeState.Building && buildProgress >= ShipDataset[shipIndex].cost) {
+        if (currentState == ProductionNodeState.Building && buildProgress >= CurrentShip.cost) {
             GameObject newShip = Instantiate(ShipPrefab, transform.position, Quaternion.identity);
             Ship shipComponent = newShip.GetComponent<Ship>();
 
             shipComponent.NavLine = navLine;
-            shipComponent.ShipData = ShipDataset[shipIndex];
+            shipComponent.ShipData = CurrentShip;
             shipComponent.Team = Team;
             shipComponent.Initialize();
 
-            buildProgress -= ShipDataset[shipIndex].cost;
+            buildProgress -= CurrentShip.cost;
         }
     }
 }
