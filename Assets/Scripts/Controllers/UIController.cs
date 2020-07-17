@@ -30,7 +30,7 @@ public class UIController : Singleton<UIController> {
     }
 
     void Update() {
-        if (Input.GetKeyUp(KeyCode.Escape)) {
+        if (Input.GetKeyUp(KeyCode.Escape) || Input.GetMouseButtonUp(1)) {
             SetValue("Selection", null);
         }
     }
