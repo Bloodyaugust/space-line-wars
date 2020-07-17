@@ -71,6 +71,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Paid Unity Store Assets
+/Assets/Demigiant/DOTweenPro/
 /Assets/Gizmos/ProCamera2D/
 /Assets/ProCamera2D/
 /Assets/Rewired/
