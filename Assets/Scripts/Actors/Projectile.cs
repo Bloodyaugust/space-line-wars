@@ -14,6 +14,8 @@ public class Projectile : MonoBehaviour {
     private Ship target;
     [SerializeField]
     private SOProjectile projectileData;
+    [SerializeField]
+    private SOTeamColors TeamColors;
 
     public void Initialize(int newTeam, float speed, Vector3 right, SOProjectile projectile, Ship newTarget) {
         initialSpeed = speed;
@@ -24,6 +26,8 @@ public class Projectile : MonoBehaviour {
         accumulatedSpeed = initialSpeed;
         
         gameObject.layer = LayerMask.NameToLayer(team.ToString());
+
+        GetComponent<SetMaterialProperties>().SetMaterial(0f, TeamColors.Hues[team], projectileData.sprite);
     }
 
     void Awake() {

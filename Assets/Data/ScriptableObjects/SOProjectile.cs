@@ -10,4 +10,5 @@ public class SOProjectile : ScriptableObject {
     public float range;
     public float rotationSpeed;
     public float speed;
+    public Texture2D sprite;
 }

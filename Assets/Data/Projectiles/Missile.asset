@@ -20,3 +20,4 @@ MonoBehaviour:
   range: 15
   rotationSpeed: 90
   speed: 1
+  sprite: {fileID: 2800000, guid: 32b01227d00d82e4ca465a4f53dfa11f, type: 3}

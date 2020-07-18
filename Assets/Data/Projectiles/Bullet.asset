@@ -18,4 +18,6 @@ MonoBehaviour:
   - OneShot
   moveType: ballistic
   range: 8
+  rotationSpeed: 0
   speed: 7
+  sprite: {fileID: 2800000, guid: b535d90e1f1a15b42874403d86d558b8, type: 3}
