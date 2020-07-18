@@ -144,6 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c983830343bd1e849acdb74ab6ecdcb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExplosionPrefab: {fileID: 7466865639536836144, guid: 42fa5afb616a0d946b998e1d3ac444c2,
+    type: 3}
   projectileData: {fileID: 11400000, guid: d090210289b1ecc4db0688e2d57a47f2, type: 2}
   TeamColors: {fileID: 11400000, guid: 84c2f6e8156405246a95eff5869e9d9f, type: 2}
 --- !u!114 &6344508388949223824

@@ -5,6 +5,8 @@ using System.Linq;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
+    public GameObject ExplosionPrefab;
+
     private bool damageDone;
     private Collider2D[] aoeContacts = new Collider2D[200];
     private ContactFilter2D aoeContactFilter = new ContactFilter2D();
@@ -47,6 +49,8 @@ public class Projectile : MonoBehaviour {
                 .ForEach(collider => {
                     collider.gameObject.GetComponent<Health>().Damage(Mathf.Clamp(Mathf.Lerp(projectileData.damage, 0, Vector2.Distance(collider.transform.position, transform.position) / projectileData.aoeRange), 0, projectileData.damage));
                 });
+
+            Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
         }
 
         Destroy(gameObject);
