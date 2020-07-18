@@ -44,6 +44,8 @@ public class Ship : MonoBehaviour {
             newWeapon.Initialize();
         }
 
+        gameObject.layer = LayerMask.NameToLayer(Team.ToString());
+
         SetState(ShipState.Follow);
     }
 

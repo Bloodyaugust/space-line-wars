@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
     private bool damageDone;
+    private Collider2D[] aoeContacts = new Collider2D[200];
+    private ContactFilter2D aoeContactFilter = new ContactFilter2D();
     private float distanceTraveled;
     private float health;
     private float accumulatedSpeed;
@@ -33,6 +35,22 @@ public class Projectile : MonoBehaviour {
     void Awake() {
         health = projectileData.health;
     }
+
+    void Die() {
+        if (Array.Exists(projectileData.flags, flag => flag == "AOE")) {
+            Physics2D.OverlapCircleNonAlloc(transform.position, projectileData.aoeRange, aoeContacts, ~(1 <<LayerMask.NameToLayer(team.ToString())));
+
+            aoeContacts
+                .Select(collider => collider)
+                .Where(collider => collider != null && collider.gameObject.layer != gameObject.layer && collider.name == "Health")
+                .ToList()
+                .ForEach(collider => {
+                    collider.gameObject.GetComponent<Health>().Damage(Mathf.Clamp(Mathf.Lerp(projectileData.damage, 0, Vector2.Distance(collider.transform.position, transform.position) / projectileData.aoeRange), 0, projectileData.damage));
+                });
+        }
+
+        Destroy(gameObject);
+    }
     
     void OnTriggerEnter2D(Collider2D collider) {
         if (collider.name == "Health") {
@@ -48,7 +66,7 @@ public class Projectile : MonoBehaviour {
                 }
 
                 damageDone = true;
-                Destroy(gameObject);
+                Die();
             }
         }
     }
@@ -83,7 +101,7 @@ public class Projectile : MonoBehaviour {
         }
 
         if (distanceTraveled >= projectileData.range || health <= 0) {
-            Destroy(gameObject);
+            Die();
         }
     }
 }

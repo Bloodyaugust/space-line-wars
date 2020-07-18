@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62259a3f3d27526459a64c2296af5bac, type: 3}
   m_Name: Missile
   m_EditorClassIdentifier: 
+  aoeRange: 0.5
   damage: 5
   health: 10
   flags:

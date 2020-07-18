@@ -15,7 +15,7 @@ MonoBehaviour:
   armor: 0
   cost: 8
   health: 12
-  speed: 1
+  speed: 1.4
   turnRate: 120
   moveType: fighter
   weapons:
