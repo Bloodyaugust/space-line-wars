@@ -53,6 +53,8 @@ public class ProductionSelectionView : MonoBehaviour {
     }
 
     void Show() {
+        Clear();
+
         foreach (SOShip shipData in selectedNode.ShipDataset) {
             GameObject newProductionOptionComponent = Instantiate(ShipProductionComponent, Vector3.zero, Quaternion.identity, (Transform)productionOptionsPanel);
             ShipProductionComponent shipProductionComponent = newProductionOptionComponent.GetComponent<ShipProductionComponent>();

@@ -103,11 +103,12 @@ MonoBehaviour:
   Team: 0
   navLine: {fileID: 0}
   ProductionNodeData: {fileID: 11400000, guid: e5bfad9b56ce6b7468ff8ca6e75e857c, type: 2}
+  CurrentShip: {fileID: 0}
   ShipDataset:
   - {fileID: 11400000, guid: 11a2018aecc70fa46b1bb08e08ab1fe9, type: 2}
   - {fileID: 11400000, guid: b7924c9c5c7016942a6d711aa8fcb4e7, type: 2}
+  - {fileID: 11400000, guid: 750faf26a56682e4fa52c362614a3bdd, type: 2}
   TeamColors: {fileID: 11400000, guid: 84c2f6e8156405246a95eff5869e9d9f, type: 2}
-  shipIndex: 0
 --- !u!114 &3410199573702696430
 MonoBehaviour:
   m_ObjectHideFlags: 0

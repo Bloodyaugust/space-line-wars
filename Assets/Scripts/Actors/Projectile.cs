@@ -8,15 +8,20 @@ public class Projectile : MonoBehaviour {
     private bool damageDone;
     private float distanceTraveled;
     private float health;
+    private float accumulatedSpeed;
     private float initialSpeed;
     private int team;
+    private Ship target;
     [SerializeField]
     private SOProjectile projectileData;
 
-    public void Initialize(int newTeam, float speed, Vector3 right, SOProjectile projectile) {
+    public void Initialize(int newTeam, float speed, Vector3 right, SOProjectile projectile, Ship newTarget) {
         initialSpeed = speed;
         projectileData = projectile;
+        target = newTarget;
         team = newTeam;
+
+        accumulatedSpeed = initialSpeed;
         
         gameObject.layer = LayerMask.NameToLayer(team.ToString());
     }
@@ -45,9 +50,26 @@ public class Projectile : MonoBehaviour {
     }
 
     void Update() {
+        Vector2 movementVector;
+
         switch (projectileData.moveType) {
             case "ballistic":
-                Vector2 movementVector = transform.right * (projectileData.speed + initialSpeed) * Time.deltaTime;
+                movementVector = transform.right * (projectileData.speed + initialSpeed) * Time.deltaTime;
+
+                transform.Translate(movementVector, Space.World);
+                distanceTraveled += movementVector.magnitude;
+                break;
+            case "missile":
+                if (target != null) {
+                    Vector3 targetDirection = (target.transform.position - transform.position).normalized;
+                    Vector3 rotatedTargetDirection = Quaternion.Euler(0, 0, 90) * targetDirection;
+                    Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedTargetDirection);
+
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * projectileData.rotationSpeed);
+                }
+
+                accumulatedSpeed += Time.deltaTime * projectileData.speed;
+                movementVector = transform.right * accumulatedSpeed * Time.deltaTime;
 
                 transform.Translate(movementVector, Space.World);
                 distanceTraveled += movementVector.magnitude;

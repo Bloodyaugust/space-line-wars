@@ -8,5 +8,6 @@ public class SOProjectile : ScriptableObject {
     public string[] flags;
     public string moveType;
     public float range;
+    public float rotationSpeed;
     public float speed;
 }

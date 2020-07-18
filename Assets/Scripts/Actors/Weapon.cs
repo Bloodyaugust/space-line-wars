@@ -77,7 +77,7 @@ public class Weapon : MonoBehaviour {
                 if (currentState == WeaponState.Idle) {
                     GameObject newProjectile = Instantiate(ProjectilePrefab, transform.position, transform.rotation);
 
-                    newProjectile.GetComponent<Projectile>().Initialize(ship.Team, ship.ShipData.speed, transform.right, WeaponData.projectile);
+                    newProjectile.GetComponent<Projectile>().Initialize(ship.Team, ship.ShipData.speed, transform.right, WeaponData.projectile, target);
 
                     clipRemaining--;
                     timeToCooldown = WeaponData.cooldown;
