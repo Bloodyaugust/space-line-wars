@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 638251dfebc41794a8aef455dbaad461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExplosionPrefab: {fileID: 4194076856686825938, guid: 0325ae66aaa245e4ca5ad92c4e8d064b,
+    type: 3}
   WeaponPrefab: {fileID: 4326738011635481665, guid: a3ff6e5632d467742859aa153b63a66b,
     type: 3}
   Team: 0

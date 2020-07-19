@@ -14,6 +14,7 @@ public class Ship : MonoBehaviour {
     public event Action Died;
     public event Action<ShipState> StateChange;
 
+    public GameObject ExplosionPrefab;
     public GameObject WeaponPrefab;
     public int Team;
     public LineRenderer NavLine;
@@ -62,6 +63,8 @@ public class Ship : MonoBehaviour {
     }
 
     void OnDied() {
+        Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
+
         Died?.Invoke();
         Destroy(gameObject);
     }
