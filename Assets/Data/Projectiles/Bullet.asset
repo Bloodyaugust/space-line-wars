@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62259a3f3d27526459a64c2296af5bac, type: 3}
   m_Name: Bullet
   m_EditorClassIdentifier: 
+  aoeRange: 0
   damage: 1
   health: 1
+  hitParticleSystemPrefab: {fileID: 1317999455118382348, guid: ced80258587250a468d7cb4d785509e0,
+    type: 3}
   flags:
   - OneShot
   moveType: ballistic

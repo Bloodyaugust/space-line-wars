@@ -6,6 +6,7 @@ public class SOProjectile : ScriptableObject {
     public float aoeRange;
     public float damage;
     public float health;
+    public GameObject hitParticleSystemPrefab;
     public string[] flags;
     public string moveType;
     public float range;
