@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 
 public class TargetAcquisition : MonoBehaviour {
-    public event Action<Ship> TargetAcquired;
+    public event Action<ITargetable> TargetAcquired;
     public event Action TargetLost;
 
     private bool loseTargetOnRangeExit;
@@ -14,7 +14,7 @@ public class TargetAcquisition : MonoBehaviour {
     private float range;
     private List<Ship> possibleTargets;
     private Rigidbody2D r2D;
-    private Ship currentTarget;
+    private ITargetable currentTarget;
     private Ship parentShip;
 
     public void Initialize(float newRange, bool respectRangeForTargetKeeping) {
@@ -40,7 +40,7 @@ public class TargetAcquisition : MonoBehaviour {
 
 
         if (selectedCollider != null) {
-            currentTarget = selectedCollider.GetComponentInParent<Ship>();
+            currentTarget = selectedCollider.GetComponentInParent<ITargetable>();
             TargetAcquired?.Invoke(currentTarget);
             r2D.simulated = false;
 
@@ -70,13 +70,13 @@ public class TargetAcquisition : MonoBehaviour {
     }
 
     void Update() {
-        if (currentTarget != null && Vector3.Distance(transform.position, currentTarget.transform.position) > range && loseTargetOnRangeExit) {
+        if (currentTarget != null && currentTarget.gameObject != null && Vector3.Distance(transform.position, currentTarget.transform.position) > range && loseTargetOnRangeExit) {
             Untarget();
         }
     }
 
     void FixedUpdate() {
-        if (currentTarget == null) {
+        if (currentTarget == null || currentTarget.gameObject == null) {
             FindTarget();
         }
     }

@@ -10,13 +10,13 @@ public enum ShipState {
     Attack
 }
 
-public class Ship : MonoBehaviour {
+public class Ship : MonoBehaviour, ITargetable {
     public event Action Died;
     public event Action<ShipState> StateChange;
 
     public GameObject ExplosionPrefab;
     public GameObject WeaponPrefab;
-    public int Team;
+    public int Team { get; set; }
     public LineRenderer NavLine;
     public SOShip ShipData;
     public SOTeamColors TeamColors;
@@ -73,7 +73,7 @@ public class Ship : MonoBehaviour {
         SetState(ShipState.Idle);
     }
 
-    void OnTargetAcquired(Ship newTarget) {
+    void OnTargetAcquired(ITargetable newTarget) {
         SetState(ShipState.Attack);
     }
 

@@ -5,21 +5,20 @@ using System.Linq;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour {
+    public SOTeamColors TeamColors;
+
     private bool damageDone;
     private Collider2D[] aoeContacts = new Collider2D[200];
-    private ContactFilter2D aoeContactFilter = new ContactFilter2D();
     private float distanceTraveled;
     private float health;
     private float accumulatedSpeed;
     private float initialSpeed;
     private int team;
-    private Ship target;
+    private ITargetable target;
     [SerializeField]
     private SOProjectile projectileData;
-    [SerializeField]
-    private SOTeamColors TeamColors;
 
-    public void Initialize(int newTeam, float speed, Vector3 right, SOProjectile projectile, Ship newTarget) {
+    public void Initialize(int newTeam, float speed, Vector3 right, SOProjectile projectile, ITargetable newTarget) {
         initialSpeed = speed;
         projectileData = projectile;
         target = newTarget;
@@ -55,15 +54,15 @@ public class Projectile : MonoBehaviour {
     
     void OnTriggerEnter2D(Collider2D collider) {
         if (collider.name == "Health") {
-            Ship colliderShip = collider.gameObject.GetComponentInParent<Ship>();
+            ITargetable colliderTarget = collider.gameObject.GetComponentInParent<ITargetable>();
 
-            if (colliderShip.Team != team) {
+            if (colliderTarget.Team != team) {
                 if (Array.Exists(projectileData.flags, flag => flag == "OneShot")) {
                     if (!damageDone) {
-                        colliderShip.GetComponentInChildren<Health>().Damage(projectileData.damage);
+                        colliderTarget.gameObject.GetComponentInChildren<Health>().Damage(projectileData.damage);
                     }
                 } else {
-                    colliderShip.GetComponentInChildren<Health>().Damage(projectileData.damage);
+                    colliderTarget.gameObject.GetComponentInChildren<Health>().Damage(projectileData.damage);
                 }
 
                 damageDone = true;
@@ -83,7 +82,7 @@ public class Projectile : MonoBehaviour {
                 distanceTraveled += movementVector.magnitude;
                 break;
             case "missile":
-                if (target != null) {
+                if (target != null && (MonoBehaviour)target != null) {
                     Vector3 targetDirection = (target.transform.position - transform.position).normalized;
                     Vector3 rotatedTargetDirection = Quaternion.Euler(0, 0, 90) * targetDirection;
                     Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedTargetDirection);

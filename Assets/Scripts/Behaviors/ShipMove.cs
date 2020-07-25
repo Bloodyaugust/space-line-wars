@@ -13,7 +13,7 @@ public class ShipMove : MonoBehaviour {
     private int turnDirection;
     private LineRenderer navLine;
     private Ship ship;
-    private Ship currentTarget;
+    private ITargetable currentTarget;
     private ShipState currentState;
     private TargetAcquisition targetAcquisition;
     private Vector3[] navLinePoints;
@@ -46,7 +46,7 @@ public class ShipMove : MonoBehaviour {
         currentState = newState;
     }
 
-    void OnTargetAcquired(Ship newTarget) {
+    void OnTargetAcquired(ITargetable newTarget) {
         currentTarget = newTarget;
     }
 

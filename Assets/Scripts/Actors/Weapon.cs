@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour {
     private float timeToCooldown;
     private float timeToReload;
     private Ship ship;
-    private Ship target;
+    private ITargetable target;
     private TargetAcquisition targetAcquisition;
     private WeaponState currentState;
 
@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour {
         SetState(WeaponState.Idle);
     }
 
-    void OnTargetAcquired(Ship newTarget) {
+    void OnTargetAcquired(ITargetable newTarget) {
         target = newTarget;
     }
 
