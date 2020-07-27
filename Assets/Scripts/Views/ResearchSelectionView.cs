@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -54,6 +55,10 @@ public class ResearchSelectionView : MonoBehaviour {
             foreach (Transform researchOptionTransform in (Transform)researchOptionsPanel) {
                 ResearchComponent researchComponent = researchOptionTransform.GetComponent<ResearchComponent>();
 
+                if (researchComponent.Research.prerequisites.All(prerequisite => uiController.Store["CompletedResearch"][selectedNode.Team].Contains(prerequisite))) {
+                    researchComponent.Enable();
+                }
+
                 if (uiController.Store["CompletedResearch"][selectedNode.Team].Contains(researchComponent.Research)) {
                     researchComponent.Disable();
                 }
@@ -68,7 +73,8 @@ public class ResearchSelectionView : MonoBehaviour {
             GameObject newResearchOptionComponent = Instantiate(ResearchComponent, Vector3.zero, Quaternion.identity, (Transform)researchOptionsPanel);
             ResearchComponent researchComponent = newResearchOptionComponent.GetComponent<ResearchComponent>();
 
-            bool isDisabled = uiController.Store["CompletedResearch"][selectedNode.Team].Contains(researchData);
+            bool isDisabled = uiController.Store["CompletedResearch"][selectedNode.Team].Contains(researchData) 
+                || researchData.prerequisites.Any(prerequisite => !uiController.Store["CompletedResearch"][selectedNode.Team].Contains(prerequisite));
             researchComponent.Initialize(isDisabled, researchData);
 
             researchComponent.Clicked += OnResearchComponentClicked;

@@ -22,6 +22,14 @@ public class ResearchComponent : MonoBehaviour, IPointerClickHandler {
         }
     }
 
+    public void Enable() {
+        if (disabled) {
+            disabled = false;
+
+            image.color = Color.HSVToRGB(0, 0, 1);
+        }
+    }
+
     public void Initialize(bool isDisabled, SOResearch research) {
         Research = research;
 

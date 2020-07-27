@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ae409e4c3996247b4e6eef259bb5dc, type: 3}
+  m_Name: Tier I
+  m_EditorClassIdentifier: 
+  amount: 1
+  cost: 30
+  icon: {fileID: 2800000, guid: ac15f96ce5980ab4eb7de875c1f7b02e, type: 3}
+  prerequisites: []
+  description: Upgrades your tech options to Tier 1
+  key: Tier
