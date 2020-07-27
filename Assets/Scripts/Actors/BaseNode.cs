@@ -11,16 +11,22 @@ public enum BaseNodeState {
 
 public class BaseNode : MonoBehaviour, ITargetable {
     public event Action Died;
+    public event Action<SOResearch, int> ResearchCompleted;
 
+    public BaseNodeState CurrentState;
     public int StartingTeam;
     public int Team { get; set; }
     public SOBaseNode BaseNodeData;
+    public SOResearch CurrentResearch;
     public SOTeamColors TeamColors;
 
-    private BaseNodeState currentState;
-    private float researchProgress;
+    private float researchProgress; 
     private Health health;
     private SetMaterialProperties setMaterialProperties;
+
+    public void Research(float amount) {
+        researchProgress += amount;
+    }
 
     void Awake() {
         health = GetComponentInChildren<Health>();
@@ -37,7 +43,7 @@ public class BaseNode : MonoBehaviour, ITargetable {
     }
 
     void Start() {
-        currentState = BaseNodeState.Idle;
+        CurrentState = BaseNodeState.Idle;
 
         gameObject.layer = LayerMask.NameToLayer(Team.ToString());
         setMaterialProperties.SetMaterial(1f, TeamColors.Hues[Team], BaseNodeData.sprite);
@@ -46,6 +52,12 @@ public class BaseNode : MonoBehaviour, ITargetable {
     }
 
     void Update() {
+        if (CurrentState == BaseNodeState.Researching && researchProgress >= CurrentResearch.cost) {
+            CurrentState = BaseNodeState.Idle;
 
+            ResearchCompleted?.Invoke(CurrentResearch, Team);
+
+            CurrentResearch = null;
+        }
     }
 }

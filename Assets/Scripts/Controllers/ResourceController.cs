@@ -5,8 +5,10 @@ using System.Linq;
 using UnityEngine;
 
 public class ResourceController : MonoBehaviour {
+    private BaseNode[] baseNodes;
     private Dictionary<int, int> productionNodeCount = new Dictionary<int, int>() { {0, 0}, {1, 0} };
     private Dictionary<int, float> resourceRate = new Dictionary<int, float>() { {0, 0}, {1, 0} };
+    private float[] buildRates = new float[2];
     private ProductionNode[] productionNodes;
     private ResourceNode[] resourceNodes;
     private UIController uiController;
@@ -48,6 +50,8 @@ public class ResourceController : MonoBehaviour {
     }
 
     void Start() {
+        baseNodes = GameObject.FindGameObjectsWithTag("BaseNode")
+            .Select(gameObject => gameObject.GetComponent<BaseNode>()).ToArray();
         productionNodes = GameObject.FindGameObjectsWithTag("ProductionNode")
             .Select(gameObject => gameObject.GetComponent<ProductionNode>()).ToArray();
         resourceNodes = GameObject.FindGameObjectsWithTag("ResourceNode")
@@ -74,12 +78,26 @@ public class ResourceController : MonoBehaviour {
     }
 
     void Update() {
+        for (int i = 0; i < buildRates.Length; i++) {
+            int activeBuildings = productionNodeCount[i];
+
+            if (baseNodes[i].CurrentState == BaseNodeState.Researching) {
+                activeBuildings++;
+            }
+
+            buildRates[i] = resourceRate[i] / activeBuildings;
+        }
+
         for (int i = 0; i < productionNodes.Length; i++) {
             ProductionNode currentNode = productionNodes[i];
 
             if (currentNode.Team < 2) {
-                currentNode.Build((resourceRate[currentNode.Team] / productionNodeCount[currentNode.Team]) * Time.deltaTime, resourceRate[currentNode.Team] / productionNodeCount[currentNode.Team]);
+                currentNode.Build(buildRates[currentNode.Team] * Time.deltaTime, buildRates[currentNode.Team]);
             }
+        }
+
+        for (int i = 0; i < baseNodes.Length; i++) {
+            baseNodes[i].Research(buildRates[i] * Time.deltaTime);
         }
     }
 }
