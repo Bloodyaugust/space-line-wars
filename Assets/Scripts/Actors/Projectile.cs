@@ -17,6 +17,7 @@ public class Projectile : MonoBehaviour {
     private ITargetable target;
     [SerializeField]
     private SOProjectile projectileData;
+    private UIController uiController;
 
     public void Initialize(int newTeam, float speed, Vector3 right, SOProjectile projectile, ITargetable newTarget) {
         initialSpeed = speed;
@@ -33,6 +34,7 @@ public class Projectile : MonoBehaviour {
 
     void Awake() {
         health = projectileData.health;
+        uiController = UIController.Instance;
     }
 
     void Die() {
@@ -57,12 +59,16 @@ public class Projectile : MonoBehaviour {
             ITargetable colliderTarget = collider.gameObject.GetComponentInParent<ITargetable>();
 
             if (colliderTarget.Team != team) {
+                List<SOResearch> researches = uiController.Store["CompletedResearch"][team];
+                float researchDamageBonus = researches.Where(research => research.key == "Attack").Aggregate(0f, (total, next) => total + next.amount);
+                float damage = projectileData.damage + researchDamageBonus;
+
                 if (Array.Exists(projectileData.flags, flag => flag == "OneShot")) {
                     if (!damageDone) {
-                        colliderTarget.gameObject.GetComponentInChildren<Health>().Damage(projectileData.damage);
+                        colliderTarget.gameObject.GetComponentInChildren<Health>().Damage(damage);
                     }
                 } else {
-                    colliderTarget.gameObject.GetComponentInChildren<Health>().Damage(projectileData.damage);
+                    colliderTarget.gameObject.GetComponentInChildren<Health>().Damage(damage);
                 }
 
                 damageDone = true;

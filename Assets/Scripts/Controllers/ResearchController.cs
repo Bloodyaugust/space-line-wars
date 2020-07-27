@@ -5,8 +5,6 @@ using System.Linq;
 using UnityEngine;
 
 public class ResearchController : MonoBehaviour {
-    public SOResearch[] Researches;
-
     private BaseNode[] baseNodes;
     private UIController uiController;
 
@@ -17,6 +15,7 @@ public class ResearchController : MonoBehaviour {
     void OnResearchCompleted(SOResearch research, int team) {
         uiController.Store["CompletedResearch"][team].Add(research);
         uiController.UpdateValue("CompletedResearch");
+        Debug.Log("New research completed: " + research.description + " on team: " + team.ToString());
     }
 
     void Start() {

@@ -41,13 +41,13 @@ public class ProductionSelectionView : MonoBehaviour {
     }
 
     void OnStoreUpdated(string storeKey) {
-        if (storeKey == "Selection" && uiController.Store[storeKey] != null && uiController.Store[storeKey].GetComponent<ProductionNode>()) {
+        if (storeKey == "Selection" && uiController.Store[storeKey] != null && uiController.Store[storeKey].GetComponent<ProductionNode>() != null) {
             selectedNode = uiController.Store[storeKey].GetComponent<ProductionNode>();
 
             Show();
         }
 
-        if (storeKey == "Selection" && (uiController.Store[storeKey] == null || !uiController.Store[storeKey].GetComponent<ProductionNode>()) && shown) {
+        if (storeKey == "Selection" && (uiController.Store[storeKey] == null || uiController.Store[storeKey].GetComponent<ProductionNode>() == null) && shown) {
             Hide();
         }
     }

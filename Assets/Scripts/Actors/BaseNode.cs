@@ -52,6 +52,10 @@ public class BaseNode : MonoBehaviour, ITargetable {
     }
 
     void Update() {
+        if (CurrentState == BaseNodeState.Idle && CurrentResearch != null) {
+            CurrentState = BaseNodeState.Researching;
+        }
+
         if (CurrentState == BaseNodeState.Researching && researchProgress >= CurrentResearch.cost) {
             CurrentState = BaseNodeState.Idle;
 
