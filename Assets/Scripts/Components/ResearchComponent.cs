@@ -6,10 +6,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ResearchComponent : MonoBehaviour, IPointerClickHandler {
+public class ResearchComponent : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler {
     public event Action<SOResearch> Clicked;
     
     public SOResearch Research;
+    private UIController uiController;
 
     private bool disabled;
     private RawImage image;
@@ -46,7 +47,16 @@ public class ResearchComponent : MonoBehaviour, IPointerClickHandler {
         }
     }
 
+    public void OnPointerEnter(PointerEventData eventData) {
+        uiController.SetValue("TooltipItem", Research);
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        uiController.SetValue("TooltipItem", null);
+    }
+
     void Awake() {
         image = GetComponent<RawImage>();
+        uiController = UIController.Instance;
     }
 }

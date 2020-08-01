@@ -13,7 +13,8 @@ public class UIController : Singleton<UIController> {
         {"CompletedResearch", new Dictionary<int, List<SOResearch>>() { {0, new List<SOResearch>()}, {1, new List<SOResearch>()} }},
         {"ProductionNodes", new float[2]},
         {"ResourceRate", new float[2]},
-        {"Selection", null}
+        {"Selection", null},
+        {"TooltipItem", null}
     };
 
 	static public T RegisterComponent<T> () where T: Component {

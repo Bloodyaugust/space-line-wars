@@ -65,7 +65,7 @@ public class ProductionSelectionView : MonoBehaviour {
             shipProductionComponent.Clicked += OnShipProductionComponentClicked;
         }
 
-        view.DOAnchorPos(new Vector2(0, 75), 0.2f);
+        view.DOAnchorPos(new Vector2(362, 75), 0.2f);
         shown = true;
     }
 

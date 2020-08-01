@@ -17,6 +17,8 @@ MonoBehaviour:
   health: 5
   speed: 2
   turnRate: 180
+  description: A basic, fast, and paper-thin way to deal a little damage and capture
+    points.
   moveType: fighter
   weapons:
   - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}

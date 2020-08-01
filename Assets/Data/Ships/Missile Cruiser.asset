@@ -17,6 +17,9 @@ MonoBehaviour:
   health: 8
   speed: 1
   turnRate: 90
+  description: An incredible, cheap option for dealing large amounts of damage from
+    a distance to groups of more maneoverable enemies. Keep these behind the front
+    lines!
   moveType: fighter
   weapons:
   - weapon: {fileID: 11400000, guid: e3af44af42b2dee4abbaaf060c07d8b9, type: 2}
