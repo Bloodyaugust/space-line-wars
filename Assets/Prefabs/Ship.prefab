@@ -103,7 +103,6 @@ MonoBehaviour:
     type: 3}
   WeaponPrefab: {fileID: 4326738011635481665, guid: a3ff6e5632d467742859aa153b63a66b,
     type: 3}
-  Team: 0
   NavLine: {fileID: 0}
   ShipData: {fileID: 11400000, guid: 11a2018aecc70fa46b1bb08e08ab1fe9, type: 2}
   TeamColors: {fileID: 11400000, guid: 84c2f6e8156405246a95eff5869e9d9f, type: 2}
@@ -237,6 +236,18 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &1819337566508068603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455321170032514241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f43f75b7bea8d4de1838fed03ff0942a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &808474216407870938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306,6 +317,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe2d6e49bd6de37439fe02b3f50d3375, type: 3}
+--- !u!1 &3455321170032514241 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2651357151496337691, guid: fe2d6e49bd6de37439fe02b3f50d3375,
+    type: 3}
+  m_PrefabInstance: {fileID: 808474216407870938}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4053283656126684195 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3708836367893950969, guid: fe2d6e49bd6de37439fe02b3f50d3375,

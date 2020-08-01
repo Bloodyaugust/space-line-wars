@@ -10,7 +10,7 @@ public enum ShipState {
     Attack
 }
 
-public class Ship : MonoBehaviour, ITargetable {
+public class Ship : MonoBehaviour, ITargetable, ITooltip {
     public event Action Died;
     public event Action<ShipState> StateChange;
 
@@ -29,6 +29,10 @@ public class Ship : MonoBehaviour, ITargetable {
     private SetMaterialProperties setMaterialProperties;
     private TargetAcquisition targetAcquisition;
     private TrailRenderer trailRenderer;
+
+    public string GetTooltipText() {
+        return ShipData.GetTooltipText();
+    }
 
     public void Initialize() {
         setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], ShipData.sprite);
