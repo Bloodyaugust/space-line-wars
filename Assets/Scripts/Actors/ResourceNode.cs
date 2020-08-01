@@ -9,7 +9,7 @@ public enum ResourceNodeState {
     Mining
 }
 
-public class ResourceNode : MonoBehaviour {
+public class ResourceNode : MonoBehaviour, ITooltip {
     public event Action<int, int, SOResourceNode> Captured;
 
     public bool StartCaptured;
@@ -21,6 +21,10 @@ public class ResourceNode : MonoBehaviour {
     [SerializeField]
     private ResourceNodeState currentState;
     private SetMaterialProperties setMaterialProperties;
+
+    public string GetTooltipText() {
+        return ResourceNodeData.GetTooltipText();
+    }
 
     void Awake() {
         capturable = GetComponentInChildren<Capturable>();
