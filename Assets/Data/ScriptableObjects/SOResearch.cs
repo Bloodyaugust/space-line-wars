@@ -10,7 +10,17 @@ public class SOResearch : ScriptableObject, ITooltip {
     public string description;
     public string key;
 
+    private string tooltipText;
+
     public string GetTooltipText() {
+        if (tooltipText == "") {
+            tooltipText = BuildTooltipText();
+        }
+
+        return tooltipText;
+    }
+
+    string BuildTooltipText() {
         return $"<size=\"36px\"><align=\"center\">{name}</align></size>\r\n\r\n"
         + $"-<indent=\"15%\">Improves {key} by: {amount}</indent>\r\n"
         + $"-<indent=\"15%\">Cost: {cost}</indent>\r\n"
