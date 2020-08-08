@@ -40,7 +40,7 @@ public class Selectable : MonoBehaviour {
     }
 
     void OnStoreChanged(string storeKey) {
-        if (storeKey == "Selection") {
+        if (storeKey == "Selection" && spriteRenderer) {
             if (uiController.Store[storeKey] != null && uiController.Store[storeKey] == transform.parent.gameObject) {
                 spriteRenderer.enabled = true;
             } else {
