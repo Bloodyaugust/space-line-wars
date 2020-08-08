@@ -1010,6 +1010,7 @@ GameObject:
   - component: {fileID: 506705206}
   - component: {fileID: 506705208}
   - component: {fileID: 506705209}
+  - component: {fileID: 506705210}
   m_Layer: 5
   m_Name: ResourcesPanel
   m_TagString: Untagged
@@ -1035,7 +1036,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: 0}
+  m_AnchoredPosition: {x: 50, y: 75}
   m_SizeDelta: {x: 100, y: 75}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &506705206
@@ -1112,6 +1113,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67632dbc1769bf74380a708a36771c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!111 &506705210
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506705204}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 1dffb043b25b3f941969ae24ef16135b, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 1dffb043b25b3f941969ae24ef16135b, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

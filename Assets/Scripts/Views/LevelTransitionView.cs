@@ -25,11 +25,12 @@ public class LevelTransitionView : MonoBehaviour {
     }
 
     void OnTransitionInComplete() {
-        uiController.SetValue("GameState", GameState.Playing);
+        // TODO: Swap level here
     }
 
     void OnTransitionOutComplete() {
         Hide();
+        uiController.SetValue("GameState", GameState.Playing);
     }
 
     void OnStoreUpdated(string storeKey) {
