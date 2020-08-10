@@ -18,6 +18,7 @@ public class UIController : Singleton<UIController> {
 
     public Dictionary<string, dynamic> Store = new Dictionary<string, dynamic>() {
         {"CompletedResearch", new Dictionary<int, List<SOResearch>>() { {0, new List<SOResearch>()}, {1, new List<SOResearch>()} }},
+        {"DestroyedBaseNodes", new bool[2]},
         {"GameState", GameState.Menu},
         {"ProductionNodes", new float[2]},
         {"ResourceRate", new float[2]},

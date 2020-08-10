@@ -23,6 +23,7 @@ public class BaseNode : MonoBehaviour, ITargetable {
     private float researchProgress; 
     private Health health;
     private SetMaterialProperties setMaterialProperties;
+    private UIController uiController;
 
     public void Research(float amount) {
         researchProgress += amount;
@@ -31,6 +32,7 @@ public class BaseNode : MonoBehaviour, ITargetable {
     void Awake() {
         health = GetComponentInChildren<Health>();
         setMaterialProperties = GetComponent<SetMaterialProperties>();
+        uiController = UIController.Instance;
 
         health.Died += OnDied;
 
@@ -40,6 +42,12 @@ public class BaseNode : MonoBehaviour, ITargetable {
     void OnDied() {
         Died?.Invoke();
         Destroy(gameObject);
+
+        bool[] newDestroyedBaseNodes = uiController.Store["DestroyedBaseNodes"];
+        newDestroyedBaseNodes[Team] = true;
+
+        uiController.SetValue("DestroyedBaseNodes", newDestroyedBaseNodes);
+        uiController.SetValue("GameState", GameState.Over);
     }
 
     void Start() {
