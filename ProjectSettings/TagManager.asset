@@ -8,6 +8,7 @@ TagManager:
   - ResourceNode
   - ProductionNode
   - BaseNode
+  - MapRoot
   layers:
   - Default
   - TransparentFX

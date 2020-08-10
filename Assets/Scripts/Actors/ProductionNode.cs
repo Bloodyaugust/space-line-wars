@@ -24,6 +24,7 @@ public class ProductionNode : MonoBehaviour {
 
     private Capturable capturable;
     private float buildProgress;
+    private GameObject mapRoot;
     private ProductionNodeState currentState;
     private SetMaterialProperties setMaterialProperties;
 
@@ -64,6 +65,7 @@ public class ProductionNode : MonoBehaviour {
 
     void Start() {
         currentState = ProductionNodeState.Idle;
+        mapRoot = GameObject.Find("MapRoot");
 
         Captured?.Invoke(Team, Team);
 
@@ -76,7 +78,7 @@ public class ProductionNode : MonoBehaviour {
 
     void Update() {
         if (currentState == ProductionNodeState.Building && buildProgress >= CurrentShip.cost) {
-            GameObject newShip = Instantiate(ShipPrefab, transform.position, Quaternion.identity);
+            GameObject newShip = Instantiate(ShipPrefab, transform.position, Quaternion.identity, mapRoot.transform);
             Ship shipComponent = newShip.GetComponent<Ship>();
 
             shipComponent.NavLine = navLine;

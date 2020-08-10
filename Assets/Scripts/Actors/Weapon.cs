@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour {
     private int clipRemaining;
     private float timeToCooldown;
     private float timeToReload;
+    private GameObject mapRoot;
     private Ship ship;
     private ITargetable target;
     private TargetAcquisition targetAcquisition;
@@ -46,6 +47,10 @@ public class Weapon : MonoBehaviour {
         currentState = newState;
     }
 
+    void Start() {
+        mapRoot = GameObject.Find("MapRoot");
+    }
+
     void Update() {
         timeToCooldown -= Time.deltaTime;
         timeToReload -= Time.deltaTime;
@@ -75,7 +80,7 @@ public class Weapon : MonoBehaviour {
                 transform.right = target.transform.position - transform.position;
 
                 if (currentState == WeaponState.Idle) {
-                    GameObject newProjectile = Instantiate(ProjectilePrefab, transform.position, transform.rotation);
+                    GameObject newProjectile = Instantiate(ProjectilePrefab, transform.position, transform.rotation, mapRoot.transform);
 
                     newProjectile.GetComponent<Projectile>().Initialize(ship.Team, ship.ShipData.speed, transform.right, WeaponData.projectile, target);
 
