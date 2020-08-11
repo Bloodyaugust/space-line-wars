@@ -29,6 +29,23 @@ public class BaseNode : MonoBehaviour, ITargetable {
         researchProgress += amount;
     }
 
+    public float ResearchProgressPercentage() {
+        if (CurrentState == BaseNodeState.Researching) {
+            return researchProgress / CurrentResearch.cost;
+        }
+
+        return 0;
+    }
+
+    public string ResearchProgressText() {
+        if (CurrentState == BaseNodeState.Researching) {
+            float progressAsPercentage = (researchProgress / CurrentResearch.cost) * 100;
+            return $"{progressAsPercentage.ToString("N0")}%";
+        }
+
+        return "Inactive";
+    }
+
     void Awake() {
         health = GetComponentInChildren<Health>();
         setMaterialProperties = GetComponent<SetMaterialProperties>();
@@ -66,6 +83,7 @@ public class BaseNode : MonoBehaviour, ITargetable {
 
         if (CurrentState == BaseNodeState.Researching && researchProgress >= CurrentResearch.cost) {
             CurrentState = BaseNodeState.Idle;
+            researchProgress = 0;
 
             ResearchCompleted?.Invoke(CurrentResearch, Team);
 

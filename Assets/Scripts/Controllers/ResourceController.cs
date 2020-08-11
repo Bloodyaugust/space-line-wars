@@ -97,7 +97,9 @@ public class ResourceController : MonoBehaviour {
         }
 
         for (int i = 0; i < baseNodes.Length; i++) {
-            baseNodes[i].Research(buildRates[i] * Time.deltaTime);
+            if (baseNodes[i].CurrentState == BaseNodeState.Researching) {
+                baseNodes[i].Research(buildRates[i] * Time.deltaTime);
+            }
         }
     }
 }

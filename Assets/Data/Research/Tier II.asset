@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tier II
   m_EditorClassIdentifier: 
   amount: 1
-  cost: 60
+  cost: 90
   icon: {fileID: 2800000, guid: d738d4eaa79235848805a12bb2b50d50, type: 3}
   prerequisites:
   - {fileID: 11400000, guid: 1d88345fabf64b2438060648805b84e7, type: 2}

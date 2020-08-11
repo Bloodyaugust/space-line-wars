@@ -12,11 +12,15 @@ public class ResearchSelectionView : MonoBehaviour {
 
     private bool shown;
     private BaseNode selectedNode;
+    private RectTransform progressBarForeground;
     private RectTransform researchOptionsPanel;
     private RectTransform view;
+    private TextMeshProUGUI progressPercentage;
     private UIController uiController;
 
     void Awake() {
+        progressBarForeground = transform.Find("ResearchProgressPanel/ProgressBarForeground").GetComponent<RectTransform>();
+        progressPercentage = transform.Find("ResearchProgressPanel/ProgressPercentage").GetComponent<TextMeshProUGUI>();
         researchOptionsPanel = transform.Find("ResearchOptionsPanel").GetComponent<RectTransform>();
         uiController = UIController.Instance;
         view = GetComponent<RectTransform>();
@@ -97,6 +101,9 @@ public class ResearchSelectionView : MonoBehaviour {
             foreach (Transform researchOptionTransform in (Transform)researchOptionsPanel) {
                 researchOptionTransform.gameObject.GetComponent<Outline>().enabled = researchOptionTransform.gameObject.GetComponent<ResearchComponent>().Research == selectedNode.CurrentResearch;
             }
+
+            progressBarForeground.localScale = new Vector3(selectedNode.ResearchProgressPercentage(), 1, 1);
+            progressPercentage.text = selectedNode.ResearchProgressText();
         }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tier I
   m_EditorClassIdentifier: 
   amount: 1
-  cost: 30
+  cost: 60
   icon: {fileID: 2800000, guid: ac15f96ce5980ab4eb7de875c1f7b02e, type: 3}
   prerequisites: []
   description: Upgrades your tech options to Tier 1
