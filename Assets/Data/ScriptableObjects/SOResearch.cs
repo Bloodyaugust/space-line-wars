@@ -46,4 +46,8 @@ public class SOResearch : ScriptableObject, ITooltip {
 
         return "";
     }
+
+    void OnEnable() {
+        tooltipText = "";
+    }
 }

@@ -24,4 +24,6 @@ MonoBehaviour:
   weapons:
   - weapon: {fileID: 11400000, guid: e3af44af42b2dee4abbaaf060c07d8b9, type: 2}
     position: {x: 0, y: 0}
+  prerequisites:
+  - {fileID: 11400000, guid: c87c77effe8ad874b92e89b8fcc274e1, type: 2}
   sprite: {fileID: 2800000, guid: 58690ebbd8f06394c9de573c640f2274, type: 3}

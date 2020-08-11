@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -54,6 +55,16 @@ public class ProductionSelectionView : MonoBehaviour {
         if (storeKey == "GameState" && uiController.Store[storeKey] == GameState.Over && shown) {
             Hide();
         }
+
+        if (storeKey == "CompletedResearch" && selectedNode != null) {
+            foreach (Transform productionOptionTransform in (Transform)productionOptionsPanel) {
+                ShipProductionComponent shipProductionComponent = productionOptionTransform.GetComponent<ShipProductionComponent>();
+
+                if (shipProductionComponent.Ship.prerequisites.Length == 0 || shipProductionComponent.Ship.prerequisites.All(prerequisite => uiController.Store["CompletedResearch"][selectedNode.Team].Contains(prerequisite))) {
+                    shipProductionComponent.Enable();
+                }
+            }
+        }
     }
 
     void Show() {
@@ -65,6 +76,10 @@ public class ProductionSelectionView : MonoBehaviour {
 
             shipProductionComponent.Ship = shipData;
             newProductionOptionComponent.GetComponent<RawImage>().texture = shipData.sprite;
+
+            if (shipProductionComponent.Ship.prerequisites.Length == 0 || shipProductionComponent.Ship.prerequisites.All(prerequisite => uiController.Store["CompletedResearch"][selectedNode.Team].Contains(prerequisite))) {
+                shipProductionComponent.Enable();
+            }
 
             shipProductionComponent.Clicked += OnShipProductionComponentClicked;
         }

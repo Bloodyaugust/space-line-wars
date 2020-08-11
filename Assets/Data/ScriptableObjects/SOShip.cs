@@ -17,6 +17,7 @@ public class SOShip : ScriptableObject, ITooltip {
     public string description;
     public string moveType;
     public ShipWeaponDefinition[] weapons;
+    public SOResearch[] prerequisites;
     public Texture2D sprite;
 
     private string tooltipText;
@@ -34,7 +35,31 @@ public class SOShip : ScriptableObject, ITooltip {
         + $"-<indent=\"15%\">Armor: {armor}</indent>\r\n"
         + $"-<indent=\"15%\">Cost: {cost}</indent>\r\n"
         + $"-<indent=\"15%\">Health: {health}</indent>\r\n"
-        + $"-<indent=\"15%\">Speed: {speed}</indent>\r\n\r\n"
+        + $"-<indent=\"15%\">Speed: {speed}</indent>\r\n"
+        + $"{GetPrerequisiteText()}\r\n\r\n"
         + $"{description}";
+    }
+
+    string GetPrerequisiteText() {
+        if (prerequisites.Length > 0) {
+            string prereqs = "-<indent=\"15%\">Requires: ";
+
+            foreach (SOResearch prerequisite in prerequisites) {
+                if (prerequisite != prerequisites[0]) {
+                    prereqs += ", ";
+                }
+                prereqs += prerequisite.name;
+            }
+
+            prereqs += "</indent>";
+
+            return prereqs;
+        }
+
+        return "";
+    }
+
+    void OnEnable() {
+        tooltipText = "";
     }
 }
