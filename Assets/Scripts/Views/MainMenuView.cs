@@ -26,6 +26,7 @@ public class MainMenuView : MonoBehaviour {
     }
 
     void OnPlayButtonClicked() {
+        uiController.ResetStore();
         uiController.SetValue("GameState", GameState.Loading);
     }
 

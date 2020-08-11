@@ -16,19 +16,23 @@ public class UIController : Singleton<UIController> {
 
     public event Action<string> StoreUpdated;
 
-    public Dictionary<string, dynamic> Store = new Dictionary<string, dynamic>() {
-        {"CompletedResearch", new Dictionary<int, List<SOResearch>>() { {0, new List<SOResearch>()}, {1, new List<SOResearch>()} }},
-        {"DestroyedBaseNodes", new bool[2]},
-        {"GameState", GameState.Menu},
-        {"ProductionNodes", new float[2]},
-        {"ResourceRate", new float[2]},
-        {"Selection", null},
-        {"TooltipItem", null}
-    };
+    public Dictionary<string, dynamic> Store;
 
 	static public T RegisterComponent<T> () where T: Component {
 		return Instance.GetOrAddComponent<T>();
 	}
+
+    public void ResetStore() {
+        Store = new Dictionary<string, dynamic>() {
+            {"CompletedResearch", new Dictionary<int, List<SOResearch>>() { {0, new List<SOResearch>()}, {1, new List<SOResearch>()} }},
+            {"DestroyedBaseNodes", new bool[2]},
+            {"GameState", GameState.Menu},
+            {"ProductionNodes", new float[2]},
+            {"ResourceRate", new float[2]},
+            {"Selection", null},
+            {"TooltipItem", null}
+        };
+    }
 
     public void SetValue(string key, dynamic value) {
         Store[key] = value;
@@ -42,6 +46,7 @@ public class UIController : Singleton<UIController> {
 
     void Awake() {
         DontDestroyOnLoad(gameObject);
+        ResetStore();
     }
 
     void Update() {
