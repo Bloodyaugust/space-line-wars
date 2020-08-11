@@ -21,7 +21,7 @@ public class ResourceView : MonoBehaviour {
 
     void OnStoreUpdated(string storeKey) {
         if (storeKey == "ResourceRate") {
-            resourceRate.text = uiController.Store[storeKey][0].ToString();
+            resourceRate.text = uiController.Store[storeKey][0].ToString() + "/sec";
         }
 
         if (storeKey == "ProductionNodes") {
