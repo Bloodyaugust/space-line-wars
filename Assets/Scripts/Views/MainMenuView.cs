@@ -11,6 +11,14 @@ public class MainMenuView : MonoBehaviour {
     private RectTransform view;
     private UIController uiController;
 
+    public void OnItchButtonClicked() {
+        Application.OpenURL("https://synsugarstudio.itch.io/");
+    }
+
+    public void OnTwitterButtonClicked() {
+        Application.OpenURL("https://twitter.com/Bloodyaugust");
+    }
+
     void Awake() {
         playButton = transform.Find("PlayButton").GetComponent<Button>();
         uiController = UIController.Instance;
