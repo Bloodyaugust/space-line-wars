@@ -50,6 +50,10 @@ public class ProductionSelectionView : MonoBehaviour {
         if (storeKey == "Selection" && (uiController.Store[storeKey] == null || uiController.Store[storeKey].GetComponent<ProductionNode>() == null) && shown) {
             Hide();
         }
+
+        if (storeKey == "GameState" && uiController.Store[storeKey] == GameState.Over && shown) {
+            Hide();
+        }
     }
 
     void Show() {

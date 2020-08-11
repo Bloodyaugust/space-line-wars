@@ -18,7 +18,7 @@ public class TooltipView : MonoBehaviour {
     }
 
     void OnStoreUpdated(string storeKey) {
-        if (storeKey == "TooltipItem" && uiController.Store[storeKey] != null) {
+        if (storeKey == "TooltipItem" && uiController.Store[storeKey] != null && (uiController.Store["GameState"] != GameState.Over && uiController.Store["GameState"] != GameState.Menu)) {
             content.enabled = true;
             panelImage.enabled = true;
 
@@ -26,6 +26,11 @@ public class TooltipView : MonoBehaviour {
         }
 
         if (uiController.Store[storeKey] == null) {
+            content.enabled = false;
+            panelImage.enabled = false;
+        }
+
+        if (storeKey == "GameState" && uiController.Store[storeKey] == GameState.Over) {
             content.enabled = false;
             panelImage.enabled = false;
         }

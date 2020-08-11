@@ -64,6 +64,10 @@ public class ResearchSelectionView : MonoBehaviour {
                 }
             }
         }
+
+        if (storeKey == "GameState" && uiController.Store[storeKey] == GameState.Over && shown) {
+            Hide();
+        }
     }
 
     void Show() {
