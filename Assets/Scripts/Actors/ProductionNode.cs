@@ -27,6 +27,7 @@ public class ProductionNode : MonoBehaviour {
     private GameObject mapRoot;
     private ProductionNodeState currentState;
     private SetMaterialProperties setMaterialProperties;
+    private UIController uiController;
 
     public void Build(float amount, float nonDeltaAmount) {
         buildProgress += amount;
@@ -36,6 +37,7 @@ public class ProductionNode : MonoBehaviour {
     void Awake() {
         capturable = GetComponentInChildren<Capturable>();
         setMaterialProperties = GetComponent<SetMaterialProperties>();
+        uiController = UIController.Instance;
 
         CurrentShip = ShipDataset[0];
 
@@ -44,6 +46,7 @@ public class ProductionNode : MonoBehaviour {
         }
 
         capturable.Captured += OnCaptured;
+        uiController.StoreUpdated += OnStoreUpdated;
     }
 
     void OnCaptured(int newTeam) {
@@ -61,6 +64,14 @@ public class ProductionNode : MonoBehaviour {
         }
 
         setMaterialProperties.SetMaterial(1f, TeamColors.Hues[Team], ProductionNodeData.sprite);
+    }
+
+    void OnStoreUpdated(string storeKey) {
+        if (storeKey == "GameState") {
+            if (uiController.Store[storeKey] == GameState.Over) {
+                currentState = ProductionNodeState.Idle;
+            }
+        }
     }
 
     void Start() {
