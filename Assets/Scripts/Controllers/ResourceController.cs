@@ -15,6 +15,32 @@ public class ResourceController : MonoBehaviour {
 
     void Awake() {
         uiController = UIController.Instance;
+
+        baseNodes = GameObject.FindGameObjectsWithTag("BaseNode")
+            .Select(gameObject => gameObject.GetComponent<BaseNode>()).ToArray();
+        productionNodes = GameObject.FindGameObjectsWithTag("ProductionNode")
+            .Select(gameObject => gameObject.GetComponent<ProductionNode>()).ToArray();
+        resourceNodes = GameObject.FindGameObjectsWithTag("ResourceNode")
+            .Select(gameObject => gameObject.GetComponent<ResourceNode>()).ToArray();
+
+        for (int i = 0; i < productionNodes.Length; i++) {
+            ProductionNode currentNode = productionNodes[i];
+
+            if (currentNode.Team < 2) {
+                productionNodeCount[currentNode.Team] += 1;
+            }
+
+            currentNode.Captured += OnProductionNodeCaptured;
+        }
+        for (int i = 0; i < resourceNodes.Length; i++) {
+            ResourceNode currentNode = resourceNodes[i];
+
+            if (currentNode.Team < 2) {
+                resourceRate[currentNode.Team] += currentNode.ResourceNodeData.resourceRate;
+            }
+
+            currentNode.Captured += OnResourceNodeCaptured;
+        }
     }
 
     void OnProductionNodeCaptured(int newTeam, int oldTeam) {
@@ -47,34 +73,6 @@ public class ResourceController : MonoBehaviour {
         }
 
         uiController.SetValue("ResourceRate", storeResourceRates);
-    }
-
-    void Start() {
-        baseNodes = GameObject.FindGameObjectsWithTag("BaseNode")
-            .Select(gameObject => gameObject.GetComponent<BaseNode>()).ToArray();
-        productionNodes = GameObject.FindGameObjectsWithTag("ProductionNode")
-            .Select(gameObject => gameObject.GetComponent<ProductionNode>()).ToArray();
-        resourceNodes = GameObject.FindGameObjectsWithTag("ResourceNode")
-            .Select(gameObject => gameObject.GetComponent<ResourceNode>()).ToArray();
-
-        for (int i = 0; i < productionNodes.Length; i++) {
-            ProductionNode currentNode = productionNodes[i];
-
-            if (currentNode.Team < 2) {
-                productionNodeCount[currentNode.Team] += 1;
-            }
-
-            currentNode.Captured += OnProductionNodeCaptured;
-        }
-        for (int i = 0; i < resourceNodes.Length; i++) {
-            ResourceNode currentNode = resourceNodes[i];
-
-            if (currentNode.Team < 2) {
-                resourceRate[currentNode.Team] += currentNode.ResourceNodeData.resourceRate;
-            }
-
-            currentNode.Captured += OnResourceNodeCaptured;
-        }
     }
 
     void Update() {
