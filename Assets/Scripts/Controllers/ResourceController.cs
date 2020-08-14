@@ -79,7 +79,7 @@ public class ResourceController : MonoBehaviour {
         for (int i = 0; i < buildRates.Length; i++) {
             int activeBuildings = productionNodeCount[i];
 
-            if (baseNodes[i].CurrentState == BaseNodeState.Researching) {
+            if (baseNodes.First(baseNode => baseNode.Team == i).CurrentState == BaseNodeState.Researching) {
                 activeBuildings++;
             }
 

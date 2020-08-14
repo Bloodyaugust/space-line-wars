@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Missile Cruiser
   m_EditorClassIdentifier: 
   armor: 0
-  cost: 15
+  cost: 20
   health: 8
   speed: 1
   turnRate: 90

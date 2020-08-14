@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState {
     Menu,
@@ -45,6 +46,7 @@ public class UIController : Singleton<UIController> {
     }
 
     void Awake() {
+        SceneManager.LoadScene("Scenes/Basic1v1", LoadSceneMode.Additive);
         DontDestroyOnLoad(gameObject);
         ResetStore();
     }

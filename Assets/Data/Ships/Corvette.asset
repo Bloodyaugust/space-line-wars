@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Corvette
   m_EditorClassIdentifier: 
   armor: 0
-  cost: 8
+  cost: 30
   health: 12
   speed: 1.4
   turnRate: 120

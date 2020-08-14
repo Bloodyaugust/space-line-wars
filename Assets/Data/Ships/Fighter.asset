@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fighter
   m_EditorClassIdentifier: 
   armor: 0
-  cost: 2
+  cost: 10
   health: 5
   speed: 2
   turnRate: 180
@@ -23,4 +23,5 @@ MonoBehaviour:
   weapons:
   - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}
     position: {x: 0, y: 0}
+  prerequisites: []
   sprite: {fileID: 2800000, guid: 9a7e6a8e096715849badedd79d8652e9, type: 3}

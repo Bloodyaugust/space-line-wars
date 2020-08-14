@@ -27,6 +27,7 @@ public class ProductionNode : MonoBehaviour {
     private GameObject mapRoot;
     private ProductionNodeState currentState;
     private SetMaterialProperties setMaterialProperties;
+    private Selectable selectable;
     private UIController uiController;
 
     public void Build(float amount, float nonDeltaAmount) {
@@ -37,12 +38,17 @@ public class ProductionNode : MonoBehaviour {
     void Awake() {
         capturable = GetComponentInChildren<Capturable>();
         setMaterialProperties = GetComponent<SetMaterialProperties>();
+        selectable = GetComponentInChildren<Selectable>();
         uiController = UIController.Instance;
 
         CurrentShip = ShipDataset[0];
 
         if (!StartCaptured) {
             Team = 2;
+        }
+
+        if (Team == 2) {
+            selectable.gameObject.SetActive(false);
         }
 
         capturable.Captured += OnCaptured;
@@ -61,6 +67,10 @@ public class ProductionNode : MonoBehaviour {
         if (StartCaptured) {
             capturable.Captured -= OnCaptured;
             capturable.Disable();
+        }
+
+        if (!selectable.gameObject.activeSelf) {
+            selectable.gameObject.SetActive(true);
         }
 
         setMaterialProperties.SetMaterial(1f, TeamColors.Hues[Team], ProductionNodeData.sprite);
