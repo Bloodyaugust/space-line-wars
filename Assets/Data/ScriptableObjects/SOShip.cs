@@ -1,4 +1,5 @@
 ﻿using System;
+using MoonSharp.Interpreter;
 using UnityEngine;
 
 [Serializable]
@@ -8,6 +9,7 @@ public class ShipWeaponDefinition {
 }
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Ship", order = 1)]
+[MoonSharpUserData]
 public class SOShip : ScriptableObject, ITooltip {
     public float armor;
     public float cost;

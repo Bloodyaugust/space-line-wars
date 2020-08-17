@@ -33,12 +33,20 @@ public class AIController : MonoBehaviour {
         aiScript.Globals["Researches"] = Researches;
 
         aiScript.Options.DebugPrint = s => { Debug.Log(s); };
+
+        uiController.StoreUpdated += OnStoreUpdated;
     }
 
     void OnResearchCompleted(SOResearch research, int team) {
         uiController.Store["CompletedResearch"][team].Add(research);
         uiController.UpdateValue("CompletedResearch");
         Debug.Log("New research completed: " + research.description + " on team: " + team.ToString());
+    }
+
+    void OnStoreUpdated(string storeKey) {
+        if (storeKey == "ResourceRate") {
+            aiScript.Globals[storeKey] = uiController.Store[storeKey][1];
+        }
     }
 
     void Start() {
@@ -58,7 +66,7 @@ public class AIController : MonoBehaviour {
         baseNode.ResearchCompleted += OnResearchCompleted;
 
         aiScript.Globals["BaseNode"] = baseNode;
-        // aiScript.Globals["ProductionNodes"] = productionNodes;
+        aiScript.Globals["ProductionNodes"] = productionNodes;
         // aiScript.Globals["ResourceNodes"] = resourceNodes;
     }
 

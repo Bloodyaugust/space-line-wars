@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MoonSharp.Interpreter;
 using UnityEngine;
 
 public enum ProductionNodeState {
@@ -9,6 +10,7 @@ public enum ProductionNodeState {
     Building
 }
 
+[MoonSharpUserData]
 public class ProductionNode : MonoBehaviour {
     public event Action<int, int> Captured;
 

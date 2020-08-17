@@ -71,4 +71,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Researches:
   - {fileID: 11400000, guid: c6f1970fe1873c64386b2f00fb6ac9ec, type: 2}
+  - {fileID: 11400000, guid: 1d88345fabf64b2438060648805b84e7, type: 2}
+  - {fileID: 11400000, guid: c87c77effe8ad874b92e89b8fcc274e1, type: 2}
   AIScriptFilePath: Assets/Scripts/AI/AITest.lua
