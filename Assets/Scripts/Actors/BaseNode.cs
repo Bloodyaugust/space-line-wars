@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using MoonSharp.Interpreter;
 using UnityEngine;
 
 public enum BaseNodeState {
@@ -9,6 +10,7 @@ public enum BaseNodeState {
     Researching
 }
 
+[MoonSharpUserData]
 public class BaseNode : MonoBehaviour, ITargetable {
     public event Action Died;
     public event Action<SOResearch, int> ResearchCompleted;
