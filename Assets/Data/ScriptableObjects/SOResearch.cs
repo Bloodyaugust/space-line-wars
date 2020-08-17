@@ -1,7 +1,9 @@
 ﻿using System;
+using MoonSharp.Interpreter;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/Research", order = 1)]
+[MoonSharpUserData]
 public class SOResearch : ScriptableObject, ITooltip {
     public float amount;
     public float cost;

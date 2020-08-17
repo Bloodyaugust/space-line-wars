@@ -7,8 +7,10 @@ using MoonSharp.Interpreter;
 using UnityEngine;
 
 public class AIController : MonoBehaviour {
+    public SOResearch[] Researches;
     public string AIScriptFilePath;
 
+    private float aliveTime;
     private BaseNode baseNode;
     private ProductionNode[] productionNodes;
     private ResourceNode[] resourceNodes;
@@ -28,12 +30,9 @@ public class AIController : MonoBehaviour {
 
         aiScript.DoString(aiScriptString);
 
-        aiScript.Globals["LogTest"] = (Func<int>)LogTest;
-    }
+        aiScript.Globals["Researches"] = Researches;
 
-    int LogTest() {
-        Debug.Log("she lives");
-        return 1;
+        aiScript.Options.DebugPrint = s => { Debug.Log(s); };
     }
 
     void OnResearchCompleted(SOResearch research, int team) {
@@ -59,9 +58,15 @@ public class AIController : MonoBehaviour {
         baseNode.ResearchCompleted += OnResearchCompleted;
 
         aiScript.Globals["BaseNode"] = baseNode;
+        // aiScript.Globals["ProductionNodes"] = productionNodes;
+        // aiScript.Globals["ResourceNodes"] = resourceNodes;
     }
 
     void Update() {
+        aliveTime += Time.deltaTime;
+
+        aiScript.Globals["AliveTime"] = aliveTime;
+
         aiScript.Call(aiScript.Globals["update"]);
     }
 }
