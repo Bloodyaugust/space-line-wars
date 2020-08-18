@@ -90,6 +90,10 @@ public class BaseNode : MonoBehaviour, ITargetable {
 
             ResearchCompleted?.Invoke(CurrentResearch, Team);
 
+            int[] techResearched = uiController.Store["TechResearched"];
+            techResearched[Team]++;
+            uiController.SetValue("TechResearched", techResearched);
+
             CurrentResearch = null;
             setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], BaseNodeData.sprite);
         }
