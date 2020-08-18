@@ -109,8 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21c890e8bf855f4c8e40d50102edf55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentState: 0
   StartingTeam: 0
   BaseNodeData: {fileID: 11400000, guid: 73b1663564420c44eb2f863fb908744f, type: 2}
+  CurrentResearch: {fileID: 0}
   TeamColors: {fileID: 11400000, guid: 84c2f6e8156405246a95eff5869e9d9f, type: 2}
 --- !u!1001 &1221364592144893214
 PrefabInstance:
@@ -178,6 +180,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835533915398420289, guid: fe2d6e49bd6de37439fe02b3f50d3375,
+        type: 3}
+      propertyPath: HealthbarOffset.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4835533915398420289, guid: fe2d6e49bd6de37439fe02b3f50d3375,
+        type: 3}
+      propertyPath: EnableHealthbar
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe2d6e49bd6de37439fe02b3f50d3375, type: 3}
