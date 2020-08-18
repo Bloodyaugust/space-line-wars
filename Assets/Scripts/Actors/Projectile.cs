@@ -62,13 +62,22 @@ public class Projectile : MonoBehaviour {
                 List<SOResearch> researches = uiController.Store["CompletedResearch"][team];
                 float researchDamageBonus = researches.Where(research => research.key == "Attack").Aggregate(0f, (total, next) => total + next.amount);
                 float damage = projectileData.damage + researchDamageBonus;
+                Health targetHealth = colliderTarget.gameObject.GetComponentInChildren<Health>();
 
                 if (Array.Exists(projectileData.flags, flag => flag == "OneShot")) {
                     if (!damageDone) {
-                        colliderTarget.gameObject.GetComponentInChildren<Health>().Damage(damage);
+                        targetHealth.Damage(damage);
                     }
                 } else {
-                    colliderTarget.gameObject.GetComponentInChildren<Health>().Damage(damage);
+                    targetHealth.Damage(damage);
+                }
+
+                if (targetHealth.Hitpoints <= 0) {
+                    int[] kills = uiController.Store["Kills"];
+
+                    kills[team]++;
+
+                    uiController.SetValue("Kills", kills);
                 }
 
                 damageDone = true;

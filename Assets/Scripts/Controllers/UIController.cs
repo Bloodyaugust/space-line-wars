@@ -28,6 +28,7 @@ public class UIController : Singleton<UIController> {
             {"CompletedResearch", new Dictionary<int, List<SOResearch>>() { {0, new List<SOResearch>()}, {1, new List<SOResearch>()} }},
             {"DestroyedBaseNodes", new bool[2]},
             {"GameState", GameState.Menu},
+            {"Kills", new int[2]},
             {"ProductionNodes", new float[2]},
             {"ResourceRate", new float[2]},
             {"Selection", null},
