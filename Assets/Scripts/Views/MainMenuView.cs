@@ -11,8 +11,12 @@ public class MainMenuView : MonoBehaviour {
     private RectTransform view;
     private UIController uiController;
 
+    public void OnDiscordButtonClicked() {
+        Application.OpenURL("https://discord.gg/9vYv6Ck");
+    }
+
     public void OnItchButtonClicked() {
-        Application.OpenURL("https://synsugarstudio.itch.io/");
+        Application.OpenURL("https://synsugarstudio.itch.io/space-line-wars/community");
     }
 
     public void OnTwitterButtonClicked() {
