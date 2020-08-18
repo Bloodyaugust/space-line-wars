@@ -84,6 +84,10 @@ public class ResourceController : MonoBehaviour {
             }
 
             buildRates[i] = resourceRate[i] / activeBuildings;
+
+            float[] resourcesGained = uiController.Store["ResourcesGained"];
+            resourcesGained[i] += resourceRate[i] * Time.deltaTime;
+            uiController.SetValue("ResourcesGained", resourcesGained);
         }
 
         for (int i = 0; i < productionNodes.Length; i++) {

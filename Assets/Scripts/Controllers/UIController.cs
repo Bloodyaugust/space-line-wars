@@ -31,6 +31,7 @@ public class UIController : Singleton<UIController> {
             {"Kills", new int[2]},
             {"ProductionNodes", new float[2]},
             {"ResourceRate", new float[2]},
+            {"ResourcesGained", new float[2]},
             {"Selection", null},
             {"TooltipItem", null}
         };
