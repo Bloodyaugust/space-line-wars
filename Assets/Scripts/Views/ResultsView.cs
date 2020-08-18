@@ -10,11 +10,13 @@ public class ResultsView : MonoBehaviour {
     private Button mainMenuButton;
     private RectTransform view;
     private TextMeshProUGUI playerResultText;
+    private TextMeshProUGUI playerResultsBreakdown;
     private UIController uiController;
 
     void Awake() {
         mainMenuButton = transform.Find("MainMenuButton").GetComponent<Button>();
         playerResultText = transform.Find("ResultText").GetComponent<TextMeshProUGUI>();
+        playerResultsBreakdown = transform.Find("ResultsBreakdown").GetComponent<TextMeshProUGUI>();
         uiController = UIController.Instance;
         view = GetComponent<RectTransform>();
 
@@ -52,6 +54,11 @@ public class ResultsView : MonoBehaviour {
         } else {
             playerResultText.text = "You won!";
         }
+
+        playerResultsBreakdown.text = $@"
+        - Kills: {uiController.Store["Kills"][0]}
+        - Resources Gained: {uiController.Store["ResourcesGained"][0].ToString("N0")}
+        - Techs Researched: {uiController.Store["TechResearched"][0]}";
     }
 
     void Start() {
