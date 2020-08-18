@@ -67,7 +67,9 @@ public class Ship : MonoBehaviour, ITargetable, ITooltip {
     }
 
     void OnDied() {
-        Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
+        ParticleSystem particleSystem = Instantiate(ExplosionPrefab, transform.position, Quaternion.identity).GetComponentInChildren<ParticleSystem>();
+        var main = particleSystem.main;
+        main.startColor = TeamColors.Colors[Team];
 
         Died?.Invoke();
         Destroy(gameObject);

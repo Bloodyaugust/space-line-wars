@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c021df191fdf27d4da0964a01b4c3fb6, type: 3}
   m_Name: TeamColors
   m_EditorClassIdentifier: 
+  Colors:
+  - {r: 0.04209684, g: 0.8113208, b: 0.29867312, a: 1}
+  - {r: 0.21537916, g: 0.5664718, b: 0.8301887, a: 1}
+  - {r: 0.9056604, g: 0.2247061, b: 0.2007832, a: 1}
   Hues:
   - -70
   - 50
