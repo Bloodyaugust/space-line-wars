@@ -15,14 +15,14 @@ function update ()
     startedTierIResearch = true
   end
 
-  if ResourceRate >= 5 and startedTierIIResearch == false and BaseNode.CurrentResearch == nil then
-    BaseNode.CurrentResearch = Researches[3]
-    startedTierIIResearch = true
-  end
-
   if startedTierIResearch == true and BaseNode.CurrentResearch == nil and swappedToCorvetteProduction == false then
     ProductionNodes[1].CurrentShip = ProductionNodes[1].ShipDataset[2]
     swappedToCorvetteProduction = true
+  end
+
+  if ResourceRate >= 5 and startedTierIIResearch == false and BaseNode.CurrentResearch == nil then
+    BaseNode.CurrentResearch = Researches[3]
+    startedTierIIResearch = true
   end
 
   if startedTierIIResearch == true and BaseNode.CurrentResearch == nil and swappedToMissileProduction == false then
