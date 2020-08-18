@@ -15,6 +15,7 @@ public class ProductionNode : MonoBehaviour {
     public event Action<int, int> Captured;
 
     public bool StartCaptured;
+    public float BuildProgress { get; private set; }
     public float LastBuildProgress { get; private set; }
     public GameObject ShipPrefab;
     public int Team;
@@ -25,7 +26,6 @@ public class ProductionNode : MonoBehaviour {
     public SOTeamColors TeamColors;
 
     private Capturable capturable;
-    private float buildProgress;
     private GameObject mapRoot;
     private ProductionNodeState currentState;
     private SetMaterialProperties setMaterialProperties;
@@ -33,7 +33,7 @@ public class ProductionNode : MonoBehaviour {
     private UIController uiController;
 
     public void Build(float amount, float nonDeltaAmount) {
-        buildProgress += amount;
+        BuildProgress += amount;
         LastBuildProgress = nonDeltaAmount;
     }
 
@@ -60,7 +60,7 @@ public class ProductionNode : MonoBehaviour {
     void OnCaptured(int newTeam) {
         int oldTeam = Team;
         Team = newTeam;
-        buildProgress = 0;
+        BuildProgress = 0;
 
         currentState = ProductionNodeState.Building;
 
@@ -100,7 +100,7 @@ public class ProductionNode : MonoBehaviour {
     }
 
     void Update() {
-        if (currentState == ProductionNodeState.Building && buildProgress >= CurrentShip.cost) {
+        if (currentState == ProductionNodeState.Building && BuildProgress >= CurrentShip.cost) {
             GameObject newShip = Instantiate(ShipPrefab, transform.position, Quaternion.identity, mapRoot.transform);
             Ship shipComponent = newShip.GetComponent<Ship>();
 
@@ -109,7 +109,7 @@ public class ProductionNode : MonoBehaviour {
             shipComponent.Team = Team;
             shipComponent.Initialize();
 
-            buildProgress -= CurrentShip.cost;
+            BuildProgress -= CurrentShip.cost;
         }
     }
 }

@@ -12,12 +12,18 @@ public class ProductionSelectionView : MonoBehaviour {
     private bool shown;
     private ProductionNode selectedNode;
     private RectTransform productionOptionsPanel;
+    private RectTransform productionProgressPanel;
+    private RectTransform progressBarForeground;
     private RectTransform view;
+    private TextMeshProUGUI productionProgress;
     private TextMeshProUGUI productionRate;
     private UIController uiController;
 
     void Awake() {
         productionOptionsPanel = transform.Find("ProductionOptionsPanel").GetComponent<RectTransform>();
+        productionProgressPanel = transform.Find("ProductionProgressPanel").GetComponent<RectTransform>();
+        progressBarForeground = productionProgressPanel.Find("ProgressBarForeground").GetComponent<RectTransform>();
+        productionProgress = productionProgressPanel.Find("ProgressPercentage").GetComponent<TextMeshProUGUI>();
         productionRate = transform.Find("ProductionRatePanel/ProductionRate").GetComponent<TextMeshProUGUI>();
         uiController = UIController.Instance;
         view = GetComponent<RectTransform>();
@@ -94,7 +100,9 @@ public class ProductionSelectionView : MonoBehaviour {
 
     void Update() {
         if (selectedNode != null) {
+            productionProgress.text = $"{((selectedNode.BuildProgress / selectedNode.CurrentShip.cost) * 100).ToString("N0")}%";
             productionRate.text = $"{selectedNode.LastBuildProgress.ToString("n1")}/sec";
+            progressBarForeground.localScale = new Vector3(selectedNode.BuildProgress / selectedNode.CurrentShip.cost, 1, 1);
 
             foreach (Transform productionOptionTransform in (Transform)productionOptionsPanel) {
                 productionOptionTransform.gameObject.GetComponent<Outline>().enabled = productionOptionTransform.gameObject.GetComponent<ShipProductionComponent>().Ship == selectedNode.CurrentShip;
