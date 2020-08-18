@@ -73,7 +73,7 @@ public class BaseNode : MonoBehaviour, ITargetable {
         CurrentState = BaseNodeState.Idle;
 
         gameObject.layer = LayerMask.NameToLayer(Team.ToString());
-        setMaterialProperties.SetMaterial(1f, TeamColors.Hues[Team], BaseNodeData.sprite);
+        setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], BaseNodeData.sprite);
 
         health.Initialize(BaseNodeData.health);
     }
@@ -81,6 +81,7 @@ public class BaseNode : MonoBehaviour, ITargetable {
     void Update() {
         if (CurrentState == BaseNodeState.Idle && CurrentResearch != null) {
             CurrentState = BaseNodeState.Researching;
+            setMaterialProperties.SetMaterial(1f, TeamColors.Hues[Team], BaseNodeData.sprite);
         }
 
         if (CurrentState == BaseNodeState.Researching && researchProgress >= CurrentResearch.cost) {
@@ -90,6 +91,7 @@ public class BaseNode : MonoBehaviour, ITargetable {
             ResearchCompleted?.Invoke(CurrentResearch, Team);
 
             CurrentResearch = null;
+            setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], BaseNodeData.sprite);
         }
     }
 }
