@@ -18,7 +18,13 @@ public class SOResourceNode : ScriptableObject, ITooltip {
     }
 
     string BuildTooltipText() {
+        string resourcesGenerated = resourceRate > 0 ? resourceRate.ToString() : String.Join(",", resourceFlags);
+
         return $"<size=\"36px\"><align=\"center\">{name}</align></size>\r\n\r\n"
-        + $"-<indent=\"15%\">Generates: {resourceRate}</indent>\r\n";
+        + $"-<indent=\"15%\">Generates: {resourcesGenerated}</indent>\r\n";
+    }
+
+    void OnEnable() {
+        tooltipText = "";
     }
 }

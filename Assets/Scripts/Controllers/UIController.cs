@@ -33,6 +33,7 @@ public class UIController : Singleton<UIController> {
             {"ResourceRate", new float[2]},
             {"ResourcesGained", new float[2]},
             {"Selection", null},
+            {"SpecialResources", new List<string>[2] {new List<string>(), new List<string>()}},
             {"TechResearched", new int[2]},
             {"TooltipItem", null}
         };

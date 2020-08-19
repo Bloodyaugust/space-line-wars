@@ -21,6 +21,7 @@ public class ResourceNode : MonoBehaviour, ITooltip {
     [SerializeField]
     private ResourceNodeState currentState;
     private SetMaterialProperties setMaterialProperties;
+    private UIController uiController;
 
     public string GetTooltipText() {
         return ResourceNodeData.GetTooltipText();
@@ -29,6 +30,7 @@ public class ResourceNode : MonoBehaviour, ITooltip {
     void Awake() {
         capturable = GetComponentInChildren<Capturable>();
         setMaterialProperties = GetComponent<SetMaterialProperties>();
+        uiController = UIController.Instance;
 
         if (!StartCaptured) {
             Team = 2;
@@ -51,6 +53,16 @@ public class ResourceNode : MonoBehaviour, ITooltip {
         }
 
         setMaterialProperties.SetMaterial(1f, TeamColors.Hues[Team], ResourceNodeData.sprite);
+
+        uiController.Store["SpecialResources"][Team].AddRange(ResourceNodeData.resourceFlags);
+
+        if (oldTeam != 2) {
+            foreach (string resource in ResourceNodeData.resourceFlags) {
+                uiController.Store["SpecialResources"][oldTeam].Remove(resource);
+            }
+        }
+
+        uiController.UpdateValue("SpecialResources");
     }
 
     void Start() {
