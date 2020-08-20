@@ -20,7 +20,7 @@ public class SOShip : ScriptableObject, ITooltip {
     public string moveType;
     public ShipWeaponDefinition[] weapons;
     public SOResearch[] prerequisites;
-    public Texture2D sprite;
+    public Sprite sprite;
 
     private string tooltipText;
 

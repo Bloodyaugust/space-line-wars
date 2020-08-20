@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d37f8c241d647a544a58316268d1932b, type: 3}
-  m_Name: Fighter
+  m_Name: Shield Corvette
   m_EditorClassIdentifier: 
-  armor: 0
-  cost: 10
-  health: 5
-  speed: 2
+  armor: 1
+  cost: 20
+  health: 8
+  speed: 2.5
   turnRate: 180
-  description: A basic, fast, and paper-thin way to deal a little damage and capture
-    points.
+  description: A shielded corvette. Base health and armor may be low, but it more
+    than makes up for it with high maneuverability and a regenerating shield. Not
+    great at dealing damage for the cost.
   moveType: fighter
   weapons:
   - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}
-    position: {x: 0, y: 0}
+    position: {x: 0.25, y: 0}
   prerequisites: []
-  sprite: {fileID: 21300000, guid: 9a7e6a8e096715849badedd79d8652e9, type: 3}
+  sprite: {fileID: 21300000, guid: 02c231518cfaab148886f1d2b6a0936b, type: 3}

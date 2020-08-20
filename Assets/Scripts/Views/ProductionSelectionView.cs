@@ -81,7 +81,7 @@ public class ProductionSelectionView : MonoBehaviour {
             ShipProductionComponent shipProductionComponent = newProductionOptionComponent.GetComponent<ShipProductionComponent>();
 
             shipProductionComponent.Ship = shipData;
-            newProductionOptionComponent.GetComponent<RawImage>().texture = shipData.sprite;
+            newProductionOptionComponent.GetComponent<RawImage>().texture = shipData.sprite.texture;
 
             if (shipProductionComponent.Ship.prerequisites.Length == 0 || shipProductionComponent.Ship.prerequisites.All(prerequisite => uiController.Store["CompletedResearch"][selectedNode.Team].Contains(prerequisite))) {
                 shipProductionComponent.Enable();

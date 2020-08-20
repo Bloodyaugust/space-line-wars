@@ -27,6 +27,7 @@ public class Ship : MonoBehaviour, ITargetable, ITooltip {
     private ShipMove shipMove;
     private ShipState currentState;
     private SetMaterialProperties setMaterialProperties;
+    private SpriteRenderer spriteRenderer;
     private TargetAcquisition targetAcquisition;
     private TrailRenderer trailRenderer;
 
@@ -35,7 +36,8 @@ public class Ship : MonoBehaviour, ITargetable, ITooltip {
     }
 
     public void Initialize() {
-        setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], ShipData.sprite);
+        setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team]);
+        spriteRenderer.sprite = ShipData.sprite;
         trailRenderer.time = Mathf.Clamp(2 - ShipData.speed, 0.5f, 2);
 
         health.Initialize(ShipData.health);
@@ -58,6 +60,7 @@ public class Ship : MonoBehaviour, ITargetable, ITooltip {
         health = GetComponentInChildren<Health>();
         setMaterialProperties = GetComponent<SetMaterialProperties>();
         shipMove = GetComponentInChildren<ShipMove>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         targetAcquisition = GetComponentInChildren<TargetAcquisition>();
         trailRenderer = GetComponent<TrailRenderer>();
         health.Died += OnDied;
