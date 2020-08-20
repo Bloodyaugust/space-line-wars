@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour {
+    public event Action<bool, float> Damaged;
     public event Action Died;
 
     public bool EnableHealthbar;
@@ -17,6 +18,7 @@ public class Health : MonoBehaviour {
     private SpriteRenderer healthOverlay;
 
     public void Damage(float amount) {
+        bool shieldDamaged = false;
         float damageRemaining = amount;
 
         if (!isDead) {
@@ -28,6 +30,8 @@ public class Health : MonoBehaviour {
                     currentShield -= damageRemaining;
                     damageRemaining = 0;
                 }
+
+                shieldDamaged = true;
             }
 
             if (damageRemaining > 0) {
@@ -37,8 +41,8 @@ public class Health : MonoBehaviour {
             if (damageRemaining > 0) {
                 Hitpoints -= damageRemaining;
             }
-
-            Debug.Log($"{damageRemaining.ToString()}, {amount}, {healthyInterface.Armor}, {currentShield}");
+            
+            Damaged?.Invoke(shieldDamaged, amount);
 
             if (Hitpoints <= 0) {
                 isDead = true;

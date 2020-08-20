@@ -23,6 +23,7 @@ public class Ship : MonoBehaviour, ITargetable, ITooltip {
 
     private bool turnedLastFrame;
     private int turnDirection;
+    private float shieldEffect;
     private Health health;
     private ShipMove shipMove;
     private ShipState currentState;
@@ -36,7 +37,7 @@ public class Ship : MonoBehaviour, ITargetable, ITooltip {
     }
 
     public void Initialize() {
-        setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team]);
+        setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], ShipData.sprite.texture);
         spriteRenderer.sprite = ShipData.sprite;
         trailRenderer.time = Mathf.Clamp(2 - ShipData.speed, 0.5f, 2);
 
@@ -63,10 +64,17 @@ public class Ship : MonoBehaviour, ITargetable, ITooltip {
         spriteRenderer = GetComponent<SpriteRenderer>();
         targetAcquisition = GetComponentInChildren<TargetAcquisition>();
         trailRenderer = GetComponent<TrailRenderer>();
+        health.Damaged += OnDamaged;
         health.Died += OnDied;
         shipMove.FollowComplete += OnFollowComplete;
         targetAcquisition.TargetAcquired += OnTargetAcquired;
         targetAcquisition.TargetLost += OnTargetLost;
+    }
+
+    void OnDamaged(bool shieldDamaged, float amount) {
+        if (shieldDamaged) {
+            shieldEffect = Mathf.Lerp(0, 2, amount / ShipData.shield);
+        }
     }
 
     void OnDied() {
@@ -93,5 +101,13 @@ public class Ship : MonoBehaviour, ITargetable, ITooltip {
     void SetState(ShipState newState) {
         currentState = newState;
         StateChange?.Invoke(currentState);
+    }
+
+    void Update() {
+        if (shieldEffect > 0) {
+            setMaterialProperties.SetMaterial(shieldEffect);
+
+            shieldEffect = Mathf.Clamp(shieldEffect - Time.deltaTime, 0, shieldEffect);
+        }
     }
 }
