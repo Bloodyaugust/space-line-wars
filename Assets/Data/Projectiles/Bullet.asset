@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bullet
   m_EditorClassIdentifier: 
   aoeRange: 0
-  damage: 1
+  damage: 2
   health: 1
   hitParticleSystemPrefab: {fileID: 1317999455118382348, guid: ced80258587250a468d7cb4d785509e0,
     type: 3}

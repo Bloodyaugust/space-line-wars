@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Gatling Gun
   m_EditorClassIdentifier: 
   clipSize: 4
-  cooldown: 0.2
+  cooldown: 0.8
   firingArc: 180
   reload: 3
   range: 5

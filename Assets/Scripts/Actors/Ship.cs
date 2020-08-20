@@ -40,7 +40,7 @@ public class Ship : MonoBehaviour, ITargetable, ITooltip {
         spriteRenderer.sprite = ShipData.sprite;
         trailRenderer.time = Mathf.Clamp(2 - ShipData.speed, 0.5f, 2);
 
-        health.Initialize(ShipData.health);
+        health.Initialize(ShipData);
         shipMove.Initialize(NavLine);
         targetAcquisition.Initialize(ShipData.weapons.Max(weapon => weapon.weapon.range), false);
 

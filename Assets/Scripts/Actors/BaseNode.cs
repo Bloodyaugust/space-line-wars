@@ -75,7 +75,7 @@ public class BaseNode : MonoBehaviour, ITargetable {
         gameObject.layer = LayerMask.NameToLayer(Team.ToString());
         setMaterialProperties.SetMaterial(0f, TeamColors.Hues[Team], BaseNodeData.sprite);
 
-        health.Initialize(BaseNodeData.health);
+        health.Initialize(BaseNodeData);
     }
 
     void Update() {
