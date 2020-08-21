@@ -20,6 +20,7 @@ public class SOShip : ScriptableObject, ITooltip, IHealthy {
     public float turnRate;
     public string description;
     public string moveType;
+    public string requiredResources;
     public ShipWeaponDefinition[] weapons;
     public SOResearch[] prerequisites;
     public Sprite sprite;

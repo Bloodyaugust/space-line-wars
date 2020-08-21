@@ -37,6 +37,15 @@ public class ProductionNode : MonoBehaviour {
         LastBuildProgress = nonDeltaAmount;
     }
 
+    public SOShip[] BuildOptions() {
+        return ShipDataset.Where(shipData => {
+            bool prerequisitesMet = shipData.prerequisites.All(prerequisite => uiController.Store["CompletedResearch"][Team].Contains(prerequisite));
+            bool hasResources = shipData.requiredResources.All(resource => uiController.Store["SpecialResources"][Team].Contains(resource));
+
+            return prerequisitesMet && hasResources;
+        }).ToArray();
+    }
+
     void Awake() {
         capturable = GetComponentInChildren<Capturable>();
         setMaterialProperties = GetComponent<SetMaterialProperties>();

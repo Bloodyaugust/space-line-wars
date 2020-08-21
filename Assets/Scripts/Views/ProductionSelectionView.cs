@@ -76,6 +76,8 @@ public class ProductionSelectionView : MonoBehaviour {
     void Show() {
         Clear();
 
+        SOShip[] buildableShips = selectedNode.BuildOptions();
+
         foreach (SOShip shipData in selectedNode.ShipDataset) {
             GameObject newProductionOptionComponent = Instantiate(ShipProductionComponent, Vector3.zero, Quaternion.identity, (Transform)productionOptionsPanel);
             ShipProductionComponent shipProductionComponent = newProductionOptionComponent.GetComponent<ShipProductionComponent>();
@@ -83,7 +85,7 @@ public class ProductionSelectionView : MonoBehaviour {
             shipProductionComponent.Ship = shipData;
             newProductionOptionComponent.GetComponent<RawImage>().texture = shipData.sprite.texture;
 
-            if (shipProductionComponent.Ship.prerequisites.Length == 0 || shipProductionComponent.Ship.prerequisites.All(prerequisite => uiController.Store["CompletedResearch"][selectedNode.Team].Contains(prerequisite))) {
+            if (buildableShips.Contains(shipProductionComponent.Ship)) {
                 shipProductionComponent.Enable();
             }
 
