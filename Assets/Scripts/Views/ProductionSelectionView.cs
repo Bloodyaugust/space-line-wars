@@ -63,11 +63,29 @@ public class ProductionSelectionView : MonoBehaviour {
         }
 
         if (storeKey == "CompletedResearch" && selectedNode != null) {
+            SOShip[] buildableShips = selectedNode.BuildOptions();
+
             foreach (Transform productionOptionTransform in (Transform)productionOptionsPanel) {
                 ShipProductionComponent shipProductionComponent = productionOptionTransform.GetComponent<ShipProductionComponent>();
 
-                if (shipProductionComponent.Ship.prerequisites.Length == 0 || shipProductionComponent.Ship.prerequisites.All(prerequisite => uiController.Store["CompletedResearch"][selectedNode.Team].Contains(prerequisite))) {
+                if (buildableShips.Contains(shipProductionComponent.Ship)) {
                     shipProductionComponent.Enable();
+                } else {
+                    shipProductionComponent.Disable();
+                }
+            }
+        }
+
+        if (storeKey == "SpecialResources" && selectedNode != null) {
+            SOShip[] buildableShips = selectedNode.BuildOptions();
+
+            foreach (Transform productionOptionTransform in (Transform)productionOptionsPanel) {
+                ShipProductionComponent shipProductionComponent = productionOptionTransform.GetComponent<ShipProductionComponent>();
+
+                if (buildableShips.Contains(shipProductionComponent.Ship)) {
+                    shipProductionComponent.Enable();
+                } else {
+                    shipProductionComponent.Disable();
                 }
             }
         }
