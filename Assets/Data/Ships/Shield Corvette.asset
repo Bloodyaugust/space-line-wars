@@ -23,6 +23,8 @@ MonoBehaviour:
     than makes up for it with high maneuverability and a regenerating shield. Not
     great at dealing damage for the cost.
   moveType: fighter
+  requiredResources:
+  - antimatter
   weapons:
   - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}
     position: {x: 0.25, y: 0}
