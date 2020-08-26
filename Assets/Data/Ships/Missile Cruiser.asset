@@ -15,12 +15,15 @@ MonoBehaviour:
   armor: 0
   cost: 20
   health: 8
+  shield: 0
+  shieldRegen: 0
   speed: 1
   turnRate: 90
   description: An incredible, cheap option for dealing large amounts of damage from
     a distance to groups of more maneoverable enemies. Keep these behind the front
     lines!
-  moveType: fighter
+  moveType: strafing
+  requiredResources: []
   weapons:
   - weapon: {fileID: 11400000, guid: e3af44af42b2dee4abbaaf060c07d8b9, type: 2}
     position: {x: 0, y: 0}

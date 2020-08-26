@@ -15,11 +15,14 @@ MonoBehaviour:
   armor: 0
   cost: 10
   health: 5
+  shield: 0
+  shieldRegen: 0
   speed: 2
   turnRate: 180
   description: A basic, fast, and paper-thin way to deal a little damage and capture
     points.
   moveType: fighter
+  requiredResources: []
   weapons:
   - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}
     position: {x: 0, y: 0}

@@ -55,21 +55,46 @@ public class ShipMove : MonoBehaviour {
     }
 
     void Update() {
+        Vector3 movement = Vector3.zero;
+
         switch(currentState) {
             case ShipState.Attack:
                 if (currentTarget != null) {
-                    float angleToTarget = Vector2.SignedAngle(transform.right, currentTarget.transform.position - transform.position);
+                    switch(ship.ShipData.moveType) {
+                        case "fighter":
+                            float angleToTarget = Vector2.SignedAngle(transform.right, currentTarget.transform.position - transform.position);
 
-                    if (Mathf.Abs(angleToTarget) <= 30) {
-                        transform.Rotate(0, 0, turnRate * Time.deltaTime * Mathf.Sign(angleToTarget), Space.Self);
-                        trackingLastFrame = true;
-                    } else {
-                        if (trackingLastFrame) {
-                            turnDirection = turnDirection > 0 ? -1 : 1;
-                        }
+                            if (Mathf.Abs(angleToTarget) <= 30) {
+                                transform.Rotate(0, 0, turnRate * Time.deltaTime * Mathf.Sign(angleToTarget), Space.Self);
+                                trackingLastFrame = true;
+                            } else {
+                                if (trackingLastFrame) {
+                                    turnDirection = turnDirection > 0 ? -1 : 1;
+                                }
 
-                        transform.Rotate(0, 0, turnRate * Time.deltaTime * turnDirection, Space.Self);
-                        trackingLastFrame = false;
+                                transform.Rotate(0, 0, turnRate * Time.deltaTime * turnDirection, Space.Self);
+                                trackingLastFrame = false;
+                            }
+                            movement = transform.right * Time.deltaTime * speed;
+                            break;
+                        case "strafing":
+                            angleToTarget = Vector2.SignedAngle(transform.right, currentTarget.transform.position - transform.position);
+
+                            if (Mathf.Abs(angleToTarget) <= 30) {
+                                transform.Rotate(0, 0, turnRate * Time.deltaTime * Mathf.Sign(angleToTarget), Space.Self);
+                                trackingLastFrame = true;
+                            } else {
+                                if (trackingLastFrame) {
+                                    turnDirection = turnDirection > 0 ? -1 : 1;
+                                }
+
+                                transform.Rotate(0, 0, turnRate * Time.deltaTime * turnDirection, Space.Self);
+                                trackingLastFrame = false;
+                            }
+                            movement = transform.up * Time.deltaTime * speed * Mathf.Sin(Time.time);
+                            break;
+                        default:
+                            break;
                     }
                 }
                 break;
@@ -87,14 +112,16 @@ public class ShipMove : MonoBehaviour {
                 Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, rotatedTargetDirection);
 
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * turnRate);
+                movement = transform.right * Time.deltaTime * speed;
                 break;
             case ShipState.Idle:
                 transform.Rotate(0, 0, turnRate * Time.deltaTime, Space.Self);
+                movement = transform.right * Time.deltaTime * speed;
                 break;
             default:
                 break;
         }
 
-        transform.Translate(transform.right * Time.deltaTime * speed, Space.World);
+        transform.Translate(movement, Space.World);
     }
 }
