@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37f8c241d647a544a58316268d1932b, type: 3}
+  m_Name: Heavy Cruiser
+  m_EditorClassIdentifier: 
+  armor: 2
+  cost: 60
+  health: 30
+  shield: 0
+  shieldRegen: 0
+  speed: 1
+  turnRate: 20
+  description: Want something that can take a lot of punishment and hits harder than
+    a truck? You found it. The Heavy Cruiser can lay down a withering hail of bullets,
+    and all but the stiffest opposition won't even make it sweat.
+  moveType: capital
+  requiredResources: []
+  weapons:
+  - weapon: {fileID: 11400000, guid: e6118a36ba694284583b70ccec9a2ccf, type: 2}
+    position: {x: 1.1, y: 0}
+  - weapon: {fileID: 11400000, guid: f6a1e2e9848cbfe4991aef5143cf2351, type: 2}
+    position: {x: -0.6, y: 0.6}
+  - weapon: {fileID: 11400000, guid: f6a1e2e9848cbfe4991aef5143cf2351, type: 2}
+    position: {x: -0.6, y: -0.6}
+  - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}
+    position: {x: 0.6, y: 0}
+  - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}
+    position: {x: 0.2, y: 0}
+  - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}
+    position: {x: -0.2, y: 0}
+  - weapon: {fileID: 11400000, guid: 4e770817e67599b48b9c41cde04b74c8, type: 2}
+    position: {x: -0.6, y: 0}
+  prerequisites:
+  - {fileID: 11400000, guid: c87c77effe8ad874b92e89b8fcc274e1, type: 2}
+  sprite: {fileID: 21300000, guid: f56d9e95fa00c6942b397c926e34aadc, type: 3}

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62259a3f3d27526459a64c2296af5bac, type: 3}
+  m_Name: Railgun Slug
+  m_EditorClassIdentifier: 
+  aoeRange: 0
+  damage: 5
+  health: 1
+  hitParticleSystemPrefab: {fileID: 1317999455118382348, guid: ced80258587250a468d7cb4d785509e0,
+    type: 3}
+  flags: []
+  moveType: ballistic
+  range: 16
+  rotationSpeed: 0
+  speed: 15
+  sprite: {fileID: 2800000, guid: b535d90e1f1a15b42874403d86d558b8, type: 3}
